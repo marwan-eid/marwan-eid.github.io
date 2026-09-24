@@ -1,0 +1,57 @@
+---
+title: 'From 10 s to 1 s: fixing Lambda cold starts'
+kicker: 'Valeo · performance'
+summary: 'Users waited 10 seconds for the first response from our Java Lambda functions. Keeping instances warm got it to 2 seconds. Rewriting the cold-start-bound functions in Go got it to 1.'
+order: 3
+period: 'Since 2023'
+role: 'Diagnosis, both fixes, and the Go rewrite'
+stack: ['AWS Lambda', 'Java', 'Go', 'Provisioned Concurrency', 'Auto Scaling', 'CloudWatch']
+metrics:
+  - { value: '10 s → 1 s', label: 'initial response latency' }
+  - { value: '10×', label: 'faster cold path' }
+featured: true
+---
+
+import LatencyRace from '../../components/LatencyRace.tsx';
+
+## The problem
+
+Part of the [vehicle communication platform](/work/vehicle-platform) runs on AWS Lambda. Most requests were fast, but whenever a request landed on a **cold** function (a fresh instance with nothing loaded yet), the user waited around **10 seconds** for a response.
+
+That's the kind of problem averages hide: p50 latency looks fine, but the first interaction of a session, which is the one users remember, is terrible. Here's what the three stages of this project felt like. It plays in real time:
+
+<LatencyRace client:visible />
+
+## Why Java cold starts are slow
+
+A cold start is everything that has to happen before your handler runs for the first time. For a JVM-based function, that includes starting the JVM itself, loading and verifying classes, initializing the framework (dependency injection, reflection-heavy setup), and running code that hasn't been JIT-compiled yet. None of it is your business logic, and all of it lands on the user's first request.
+
+## Fix 1: keep instances warm (10 s → 2 s)
+
+The first fix attacked the symptom:
+
+- **Provisioned concurrency** keeps a set of initialized instances ready, so most requests never see a cold start.
+- **Auto-scaling** adjusts how much is provisioned to follow demand.
+- **Optimized warm-up** does expensive initialization ahead of the first real request.
+
+That brought the initial response down from **10 s to about 2 s**. It was a real improvement, but it had limits. You pay for warm capacity whether it's used or not, and traffic beyond the provisioned level still hits cold instances. The startup cost was still there, just hidden most of the time.
+
+## Fix 2: remove the cause (→ 1 s)
+
+The functions that dominated the cold path didn't need what the JVM offers for long-running services. So I **rewrote the cold-start-bound functions in Go**. A Go function compiles to a single native binary: no VM to boot, no classes to load, no JIT to warm up. It starts in milliseconds and uses a fraction of the memory.
+
+The result was **1 s initial response latency**, ten times faster than where we started.
+
+## Trade-offs
+
+A rewrite isn't free, so it was deliberately narrow:
+
+- **Only the cold-start-bound functions moved.** Everything that wasn't on the critical cold path stayed in Java. There was no reason to churn working code.
+- **Two languages in one platform** means two toolchains and two sets of conventions. Keeping the Go surface small and well-bounded kept that cost manageable.
+- **Warm capacity became optional** instead of load-bearing, which removed a cost that grew with traffic.
+
+## What I took away
+
+- **Measure the cold path separately.** Averages hid this for a long time. The slowest first request is its own metric.
+- **Fix the symptom first if you must, but know it's a symptom.** Provisioned concurrency bought time. Removing the startup cost fixed the problem.
+- **Pick the runtime for the workload.** The JVM is excellent for long-running services. For short-lived, scale-from-zero functions, a small native binary is the better fit.

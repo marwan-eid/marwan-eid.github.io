@@ -1,0 +1,230 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { profile } from '../data/profile';
+
+const services = [
+  {
+    title: 'Backend APIs & services',
+    text: 'Design and build the services your product runs on: REST APIs, event-driven pipelines, background jobs, and the data model underneath.',
+    tech: 'Java / Spring Boot · Go · Node.js · ASP.NET · Kafka · PostgreSQL',
+    proof: { href: '/work/chat-system', label: 'Chat API: 3–5 ms writes under load' },
+  },
+  {
+    title: 'Performance & latency fixes',
+    text: 'Find out why it’s slow, fix the cause, and prove it with before/after numbers. Cold starts, slow endpoints, database bottlenecks.',
+    tech: 'Profiling · AWS Lambda · caching · query tuning · load testing',
+    proof: { href: '/work/cold-starts', label: 'Cold starts: 10 s → 1 s' },
+  },
+  {
+    title: 'Cloud, CI/CD & DevOps',
+    text: 'Containerize, deploy and automate. Pipelines that ship in minutes with zero-downtime rollouts and automatic rollback.',
+    tech: 'AWS · Docker · Kubernetes / Helm · GitHub Actions · Terraform',
+    proof: { href: '/work/vehicle-platform', label: 'Deploys: hours → under 10 minutes' },
+  },
+  {
+    title: 'Legacy modernization',
+    text: 'Move a desktop app or monolith to the web gradually, without a risky big-bang rewrite or a freeze on features.',
+    tech: 'C# / .NET · ASP.NET APIs · React · incremental migration',
+    proof: { href: '/work/legacy-migration', label: '75k-line desktop app, moved to the web' },
+  },
+  {
+    title: 'Real-time features',
+    text: 'Live dashboards, tracking, notifications and streaming: data that shows up in the browser within a second, reliably.',
+    tech: 'Server-Sent Events · WebSockets · MQTT · Kafka · reactive streams',
+    proof: { href: '/work/milkrun', label: 'MilkRun: a live 50-van fleet' },
+  },
+  {
+    title: 'Full-stack MVPs',
+    text: 'Take an idea to a deployed, monitored product with a backend that won’t need rewriting when it gets traction.',
+    tech: 'Next.js · React · TypeScript · a solid API · CI/CD from day one',
+    proof: { href: '/work', label: 'See all case studies' },
+  },
+];
+
+const steps = [
+  { n: '01', title: 'Intro call', text: '30 minutes, free. What you’re building, where it hurts, and whether I’m the right fit.' },
+  { n: '02', title: 'Written proposal', text: 'Scope, milestones, timeline and a fixed price, or a retainer if the work is ongoing.' },
+  { n: '03', title: 'Build in small steps', text: 'Working increments you can see and test, with regular check-ins. No disappearing for a month.' },
+  { n: '04', title: 'Clean handover', text: 'Tests, docs, and runbooks, so your team can own it without me.' },
+];
+
+const faqs = [
+  {
+    q: 'Do you work alongside a full-time job?',
+    a: 'Yes. I’m a full-time engineer at Valeo, so I take on a small number of freelance projects at a time. That keeps each one properly staffed, which is me, focused.',
+  },
+  {
+    q: 'Which time zone are you in?',
+    a: 'Egypt (UTC+2/+3). That overlaps comfortably with Europe and the Middle East, and with US East Coast mornings.',
+  },
+  {
+    q: 'Can you work in our existing codebase?',
+    a: 'Absolutely, and often that’s the best option. I’ll follow your conventions and leave the code better documented than I found it.',
+  },
+  {
+    q: 'How do you price?',
+    a: 'Fixed price for well-defined projects, monthly retainer for ongoing work. You’ll get a clear number in the proposal before anything starts.',
+  },
+];
+---
+
+<Base
+  title="Hire me"
+  description="Freelance backend and full-stack engineering: APIs, performance fixes, cloud and CI/CD, legacy modernization and real-time features."
+  og="hire"
+>
+  <section class="container-page pt-14 sm:pt-20">
+    <p class="eyebrow">Freelance</p>
+    <h1 class="mt-3 max-w-4xl text-4xl font-semibold tracking-[-0.03em] text-balance sm:text-5xl">
+      Backends that are fast, reliable, and <span class="serif-accent text-accent">boring to operate.</span>
+    </h1>
+    <p class="mt-5 max-w-2xl text-[1.075rem] leading-relaxed text-muted">
+      I help startups and teams build and fix the systems behind their product. You get a senior-minded engineer who writes things down, measures
+      results, and hands over work your team can own.
+    </p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href="#contact" class="btn btn-primary">Start a conversation <Icon name="arrow-right" size={16} /></a>
+      <a href="/work" class="btn btn-ghost">See case studies</a>
+    </div>
+  </section>
+
+  <section class="container-page pt-16" aria-labelledby="services">
+    <h2 id="services" class="eyebrow">What I can help with</h2>
+    <div class="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {
+        services.map((s) => (
+          <div class="card flex flex-col p-5 sm:p-6">
+            <h3 class="font-semibold tracking-tight">{s.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted">{s.text}</p>
+            <p class="mt-4 font-mono text-[0.7rem] leading-relaxed text-faint">{s.tech}</p>
+            <a href={s.proof.href} class="group mt-auto inline-flex items-center gap-1.5 border-t border-line pt-4 text-[0.82rem] text-fg">
+              <span class="text-accent">Proof:</span> {s.proof.label}
+              <Icon name="arrow-right" size={13} class="text-faint transition-transform group-hover:translate-x-0.5" />
+            </a>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="container-page pt-20" aria-labelledby="process">
+    <h2 id="process" class="eyebrow">How it works</h2>
+    <ol class="mt-5 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+      {
+        steps.map((s) => (
+          <li class="bg-surface p-5 sm:p-6">
+            <p class="font-mono text-xs text-accent">{s.n}</p>
+            <h3 class="mt-3 font-semibold tracking-tight">{s.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted">{s.text}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="container-page grid gap-12 pt-20 lg:grid-cols-[1fr_1.1fr]">
+    <div>
+      <h2 class="eyebrow">Questions</h2>
+      <div class="mt-5 divide-y divide-line border-y border-line">
+        {
+          faqs.map((f) => (
+            <details class="group py-4">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-medium [&::-webkit-details-marker]:hidden">
+                {f.q}
+                <span class="text-faint transition-transform group-open:rotate-45" aria-hidden="true">
+                  +
+                </span>
+              </summary>
+              <p class="mt-2 text-sm leading-relaxed text-muted">{f.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+
+    <div id="contact" class="scroll-mt-24">
+      <h2 class="eyebrow">Tell me about your project</h2>
+      <form id="project-form" class="card mt-5 space-y-4 p-5 sm:p-6">
+        <div class="grid gap-4 sm:grid-cols-2">
+          <label class="block">
+            <span class="text-sm font-medium">Your name</span>
+            <input name="name" required autocomplete="name" class="field" />
+          </label>
+          <label class="block">
+            <span class="text-sm font-medium">Company <span class="font-normal text-faint">(optional)</span></span>
+            <input name="company" autocomplete="organization" class="field" />
+          </label>
+        </div>
+        <label class="block">
+          <span class="text-sm font-medium">What do you need?</span>
+          <select name="need" class="field">
+            {services.map((s) => <option>{s.title}</option>)}
+            <option>Something else</option>
+          </select>
+        </label>
+        <label class="block">
+          <span class="text-sm font-medium">Timeline</span>
+          <select name="timeline" class="field">
+            <option>As soon as possible</option>
+            <option>Within a month</option>
+            <option>In the next few months</option>
+            <option>Just exploring</option>
+          </select>
+        </label>
+        <label class="block">
+          <span class="text-sm font-medium">What are you building, and where are you stuck?</span>
+          <textarea name="message" required rows="5" class="field resize-y"></textarea>
+        </label>
+        <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+          <p class="text-xs text-faint">Opens your email app with this filled in. I reply within 2 business days.</p>
+          <button type="submit" class="btn btn-primary">Send <Icon name="arrow-right" size={16} /></button>
+        </div>
+      </form>
+      <p class="mt-4 text-sm text-muted">
+        Prefer plain email? <a class="link" href={`mailto:${profile.email}`}>{profile.email}</a>
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .field {
+    display: block;
+    width: 100%;
+    margin-top: 0.4rem;
+    border-radius: 0.6rem;
+    border: 1px solid var(--line-strong);
+    background: var(--bg);
+    padding: 0.6rem 0.75rem;
+    font-size: 0.93rem;
+    color: var(--fg);
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .field:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+</style>
+
+<script define:vars={{ email: profile.email }}>
+  document.getElementById('project-form')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const f = new FormData(e.currentTarget);
+    const get = (k) => String(f.get(k) ?? '').trim();
+    const who = get('company') ? `${get('name')} (${get('company')})` : get('name');
+    const subject = `Project inquiry: ${get('need')}`;
+    const body = [
+      `Hi Marwan,`,
+      ``,
+      get('message'),
+      ``,
+      `What I need: ${get('need')}`,
+      `Timeline: ${get('timeline')}`,
+      ``,
+      `${who}`,
+    ].join('\n');
+    window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  });
+</script>

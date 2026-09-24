@@ -1,0 +1,118 @@
+---
+import Icon from './Icon.astro';
+
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const nav = [
+  { href: '/work', label: 'Work' },
+  { href: '/about', label: 'About' },
+  { href: '/resume', label: 'Resume' },
+];
+const isActive = (href: string) => path === href || path.startsWith(`${href}/`);
+---
+
+<header class="no-print sticky top-0 z-40 border-b border-line/70 bg-bg/80 backdrop-blur-md supports-[backdrop-filter]:bg-bg/70">
+  <div class="container-page flex h-16 items-center gap-3">
+    <a href="/" class="group flex items-center gap-2.5 font-medium tracking-tight">
+      <span
+        class="grid size-8 place-items-center rounded-lg bg-fg font-mono text-[0.8rem] font-semibold text-bg transition-transform group-hover:-rotate-6"
+        aria-hidden="true">me</span
+      >
+      <span class="hidden sm:inline">Marwan Eid</span>
+    </a>
+
+    <nav class="ml-auto flex items-center gap-0.5 text-[0.9rem]" aria-label="Primary">
+      {
+        nav.map((item) => (
+          <a
+            href={item.href}
+            class:list={[
+              'rounded-md px-2.5 py-1.5 transition-colors hover:text-fg',
+              isActive(item.href) ? 'text-fg' : 'text-muted',
+            ]}
+            aria-current={isActive(item.href) ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <a
+        href="/hire"
+        class:list={[
+          'ml-1 rounded-md px-2.5 py-1.5 font-medium transition-colors',
+          isActive('/hire') ? 'bg-accent-soft text-accent' : 'text-accent hover:bg-accent-soft',
+        ]}
+        aria-current={isActive('/hire') ? 'page' : undefined}>Hire me</a
+      >
+    </nav>
+
+    <div class="flex items-center gap-1.5">
+      <button
+        type="button"
+        data-open-palette
+        class="hidden h-8 items-center gap-2 rounded-lg border border-line bg-surface px-2.5 text-[0.8rem] text-faint transition-colors hover:border-line-strong hover:text-muted md:flex"
+        aria-label="Search (Ctrl K)"
+      >
+        <Icon name="search" size={14} />
+        <span class="kbd" data-shortcut-label>Ctrl K</span>
+      </button>
+      <button
+        type="button"
+        data-theme-toggle
+        class="grid size-8 place-items-center rounded-lg text-muted transition-colors hover:bg-elev hover:text-fg"
+        aria-label="Toggle dark mode"
+      >
+        <Icon name="sun" size={16} class="theme-icon-sun" />
+        <Icon name="moon" size={16} class="theme-icon-moon" />
+      </button>
+    </div>
+  </div>
+</header>
+
+<style>
+  :global([data-theme='dark'] .theme-icon-moon),
+  :global([data-theme='light'] .theme-icon-sun) {
+    display: none;
+  }
+</style>
+
+<script>
+  const root = document.documentElement;
+
+  document.querySelector('[data-theme-toggle]')?.addEventListener('click', () => {
+    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    const apply = () => {
+      root.dataset.theme = next;
+      try {
+        localStorage.setItem('theme', next);
+      } catch {}
+      window.dispatchEvent(new CustomEvent('themechange', { detail: next }));
+    };
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if ('startViewTransition' in document && !reduced) {
+      (document as Document & { startViewTransition: (cb: () => void) => void }).startViewTransition(apply);
+    } else {
+      apply();
+    }
+  });
+
+  // Follow the OS setting until the visitor picks a theme explicitly.
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    let stored = null;
+    try {
+      stored = localStorage.getItem('theme');
+    } catch {}
+    if (!stored) {
+      root.dataset.theme = e.matches ? 'dark' : 'light';
+      window.dispatchEvent(new CustomEvent('themechange', { detail: root.dataset.theme }));
+    }
+  });
+
+  if (/Mac|iPhone|iPad/.test(navigator.platform)) {
+    const label = document.querySelector('[data-shortcut-label]');
+    if (label) label.textContent = '⌘K';
+  }
+
+  document.querySelector('[data-open-palette]')?.addEventListener('click', () => {
+    window.dispatchEvent(new CustomEvent('palette:open'));
+  });
+</script>

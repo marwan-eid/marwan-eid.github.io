@@ -1,0 +1,101 @@
+---
+title: 'MilkRun: real-time fleet tracking'
+kicker: 'Personal project · live'
+summary: 'A reactive telemetry pipeline that streams 50 delivery vans through Kafka to a live map, surviving duplicates, reordering and late events on the way. It has been running 24/7 on a single cloud VM.'
+order: 1
+period: 'Aug 2026 – present'
+role: 'Solo: design, backend, frontend, ops'
+stack: ['Java 21', 'Spring WebFlux', 'Project Reactor', 'Kafka', 'PostgreSQL / PostGIS', 'R2DBC', 'Apache Calcite', 'Resilience4j', 'React', 'TypeScript', 'Prometheus', 'Grafana', 'Docker', 'Caddy']
+metrics:
+  - { value: '50 vans', label: 'streamed live' }
+  - { value: '83M+', label: 'events processed' }
+  - { value: '38', label: 'automated tests in CI' }
+links:
+  - { label: 'Live dashboard', href: 'https://marwan-milkrun.duckdns.org/' }
+  - { label: 'Source on GitHub', href: 'https://github.com/marwan-eid/MilkRun' }
+featured: true
+---
+
+import LiveFleet from '../../components/LiveFleet.tsx';
+import Diagram from '../../components/Diagram.tsx';
+import BloomFilterDemo from '../../components/BloomFilterDemo.tsx';
+import ReorderBufferDemo from '../../components/ReorderBufferDemo.tsx';
+import { milkrunPipeline } from '../../data/diagrams';
+
+<LiveFleet client:visible api="https://marwan-milkrun.duckdns.org" replayUrl="/data/milkrun-replay.json" variant="full" />
+
+## The problem
+
+MilkRun simulates milkman-style grocery delivery: 50 electric vans working routes across Amsterdam, each reporting its position every 500 ms. The goal is a dispatcher's view that is **live** (updates within a second), **correct** (no vans teleporting backwards, no double-counted stops) and **honest about risk** (which deliveries are about to miss their slot).
+
+The hard part isn't drawing dots on a map. Real vehicle telemetry is messy, and the simulator reproduces that on purpose:
+
+- **Duplicates.** Phones on cellular networks retry sends that already succeeded, so the same GPS event arrives twice or three times.
+- **Reordering.** Network jitter and partition rebalances deliver events out of order.
+- **Late arrivals.** Some events show up after newer ones have already been processed.
+- **Slow consumers.** A browser tab goes to sleep, but the stream must keep flowing for everyone else.
+
+## Architecture
+
+Every event takes the same path: Kafka, then dedup, reorder, ETA, and out to the browser over Server-Sent Events. Click any component, or play the walkthrough.
+
+<Diagram client:visible {...milkrunPipeline} />
+
+## Key decisions
+
+### Reactive end to end
+
+The backend is Spring WebFlux on Project Reactor, consuming Kafka with reactor-kafka and writing to PostgreSQL with R2DBC. A dashboard holds long-lived connections, and a thread-per-request model spends a thread on each one doing nothing. With a non-blocking pipeline, backpressure is a property of the whole system: if a stage slows down, the consumer slows down, instead of events piling up in memory.
+
+### Server-Sent Events, not WebSockets
+
+Updates only flow one way, from server to browser. SSE is plain HTTP, reconnects automatically, passes through proxies without special handling, and is a one-liner with `EventSource` on the client. The sink is sampled to at most two updates per second per van and runs in best-effort mode: a client that can't keep up is dropped, not buffered, so one sleeping tab can't back up the stream.
+
+### A Bloom filter for deduplication
+
+A retried event carries the same `(van, sequence number)` pair as the original. Remembering every key ever seen in a hash set grows without bound. A Bloom filter answers "have I seen this?" in constant time and **constant memory**. The price is a small, tunable chance of a false positive, and it never produces false negatives, so a real duplicate always gets caught.
+
+Each van gets its own filter, sized from the target false-positive rate:
+
+```java
+// m = -n·ln(p) / (ln 2)²   →   k = (m / n)·ln 2
+bitSetSize       = (int) (-n * Math.log(p) / (Math.log(2) * Math.log(2)));  // n = 100,000, p = 0.1%  →  1,437,758 bits
+numHashFunctions = Math.max(1, (int) ((double) bitSetSize / n * Math.log(2))); // → 9
+```
+
+Positions come from double hashing, `h(i) = h1 + i·h2`, with Java's `String.hashCode` and FNV-1a as the two base hashes. Here is a miniature version with the same scheme, 64 bits and 3 hashes. Send events, retry one, then keep sending until it starts rejecting events it has never seen:
+
+<BloomFilterDemo client:visible />
+
+### A reorder buffer with a grace window
+
+Each van has a priority queue ordered by device timestamp. An event waits out a **3-second grace window** and is then released in order. That trades three seconds of latency for correctness downstream: the ETA engine never sees a van jump backwards.
+
+Anything that arrives after a newer event has been released is too late to reorder. Dropping it silently would hide data-quality problems, so it goes to a **dead-letter queue** and is persisted for audit. A van that reports `RETURNED` flushes its buffer immediately, since no more events are coming, and a size cap force-flushes if a buffer ever grows past 50 events.
+
+<ReorderBufferDemo client:visible />
+
+### Failing soft on ETAs
+
+The ETA is Haversine distance to the next stop, adjusted by PostGIS geofence speed factors: construction at Vondelpark slows vans to 40% speed, the Central Station area to 50%, and so on. That calculation sits behind a **Resilience4j circuit breaker**. If it starts failing or slowing down, the breaker opens and a linear extrapolation from recent positions takes over, so the map degrades to "approximately right" instead of "stuck".
+
+### Analytics off the hot path
+
+Questions like "which zones cause the most delay?" or "which vans breach their SLA most?" run through **Apache Calcite**, which federates SQL over the PostGIS archive. The analytics queries never compete with the reactive connection pool that serves the live stream.
+
+## What 11 days of uptime taught me
+
+The live counters at the top of this page come from the pipeline's health endpoint. In late September they showed something the unit tests never could: **the pipeline was rejecting 99% of incoming events as duplicates**. Over one 33-minute window, it checked 169,570 events and rejected 167,773 of them. The simulator only duplicates about 7%.
+
+The cause is in the sizing math above. Each filter is built for **100,000 insertions**, but at two pings a second a van passes that in under 14 hours, and the filters were never reset. As the bit arrays fill up, the false-positive rate climbs toward 100%, and brand-new events start looking like duplicates. You can reproduce it in the demo above: keep sending events and watch "real events dropped" climb.
+
+The fix is to make the filter **windowed**: keep two generations per van, check both, insert into the newer one, and rotate when the current one reaches its capacity. Retries arrive within seconds, so remembering the last ~100k events per van is more than enough, and memory stays bounded. Because sequence numbers only ever increase per van, an exact sliding-window bitmap (the anti-replay trick used by IPsec) would also work, with no false positives at all.
+
+The broader lesson: probabilistic structures come with a capacity, and "sized for n" quietly turns into a bug once you pass n. Anything with a capacity deserves a metric and an alert.
+
+## Testing and operations
+
+- **38 automated tests** run in GitHub Actions on every push: 23 Vitest tests for the simulator and 15 JUnit tests for the backend (Bloom filter, reorder buffer, ETA engine).
+- **Micrometer counters at every pipeline stage**, scraped by Prometheus and graphed in Grafana, plus a Datadog-ready dashboard definition.
+- **GraalVM native image** as an optional build target, with reflection and serialization metadata checked in.
+- **Deployed with Docker Compose behind Caddy** (automatic TLS) on a single Oracle Cloud VM: Kafka, PostgreSQL/PostGIS, the backend, the simulator and the frontend.

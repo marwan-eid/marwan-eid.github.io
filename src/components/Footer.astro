@@ -1,0 +1,60 @@
+---
+import Icon from './Icon.astro';
+import { profile } from '../data/profile';
+import { buildInfo } from '../lib/build-info';
+
+const year = new Date().getFullYear();
+const built = new Date(buildInfo.builtAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+---
+
+<footer class="no-print mt-24 border-t border-line">
+  <div class="container-page grid gap-10 py-12 sm:grid-cols-[1.4fr_1fr_1fr]">
+    <div>
+      <p class="text-lg font-medium tracking-tight">Let's build something that holds up.</p>
+      <p class="mt-2 max-w-sm text-sm text-muted">
+        I'm happy to talk about backend engineering, distributed systems, or a project you need help with.
+      </p>
+      <a href={`mailto:${profile.email}`} class="btn btn-ghost mt-5 h-9 text-sm">
+        <Icon name="mail" size={15} />
+        {profile.email}
+      </a>
+    </div>
+    <div>
+      <p class="eyebrow mb-3">Site</p>
+      <ul class="space-y-2 text-sm text-muted">
+        <li><a class="hover:text-fg" href="/work">Work</a></li>
+        <li><a class="hover:text-fg" href="/about">About</a></li>
+        <li><a class="hover:text-fg" href="/resume">Resume</a></li>
+        <li><a class="hover:text-fg" href="/hire">Hire me</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="eyebrow mb-3">Elsewhere</p>
+      <ul class="space-y-2 text-sm text-muted">
+        <li>
+          <a class="inline-flex items-center gap-2 hover:text-fg" href={profile.links.github} rel="me"
+            ><Icon name="github" size={14} /> GitHub</a
+          >
+        </li>
+        <li>
+          <a class="inline-flex items-center gap-2 hover:text-fg" href={profile.links.linkedin} rel="me"
+            ><Icon name="linkedin" size={14} /> LinkedIn</a
+          >
+        </li>
+        <li>
+          <a class="inline-flex items-center gap-2 hover:text-fg" href={profile.links.paper}
+            ><Icon name="paper" size={14} /> arXiv paper</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="container-page flex flex-col gap-2 border-t border-line py-6 font-mono text-[0.72rem] text-faint sm:flex-row sm:items-center sm:justify-between">
+    <p>© {year} {profile.name} · {profile.location}</p>
+    <p>
+      Built with Astro &amp; Preact ·{' '}
+      <a class="hover:text-muted" href={`${buildInfo.repo}/commit/${buildInfo.sha}`}>{buildInfo.sha}</a> · deployed {built}
+      · <a class="hover:text-muted" href={buildInfo.repo}>source</a>
+    </p>
+  </div>
+</footer>

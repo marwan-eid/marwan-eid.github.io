@@ -1,0 +1,131 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+
+export async function getStaticPaths() {
+  const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+  return work.map((entry, i) => ({
+    params: { slug: entry.id },
+    props: { entry, next: work[(i + 1) % work.length] },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'work'>;
+  next: CollectionEntry<'work'>;
+}
+
+const { entry, next } = Astro.props;
+const { Content, headings } = await render(entry);
+const d = entry.data;
+const toc = headings.filter((h) => h.depth === 2);
+---
+
+<Base title={d.title} description={d.summary} og={`work-${entry.id}`} type="article">
+  <article>
+    <header class="border-b border-line">
+      <div class="container-page pt-10 pb-12 sm:pt-14">
+        <a href="/work" class="group inline-flex items-center gap-1.5 text-sm text-muted hover:text-fg">
+          <Icon name="arrow-right" size={14} class="rotate-180 transition-transform group-hover:-translate-x-0.5" />
+          All work
+        </a>
+        <p class="eyebrow mt-8">{d.kicker}</p>
+        <h1 class="mt-3 max-w-4xl text-4xl font-semibold tracking-[-0.03em] text-balance sm:text-5xl">{d.title}</h1>
+        <p class="mt-5 max-w-3xl text-[1.1rem] leading-relaxed text-muted">{d.summary}</p>
+
+        <dl class="mt-10 grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-[repeat(3,auto)_1fr]">
+          {
+            d.metrics.map((m) => (
+              <div>
+                <dt class="text-[0.78rem] text-faint">{m.label}</dt>
+                <dd class="mt-0.5 font-mono text-2xl font-medium tracking-tight">{m.value}</dd>
+              </div>
+            ))
+          }
+        </dl>
+
+        <div class="mt-10 grid gap-6 border-t border-line pt-6 text-sm sm:grid-cols-[1fr_1fr_2fr]">
+          <div>
+            <p class="eyebrow mb-1.5">Timeline</p>
+            <p>{d.period}</p>
+          </div>
+          <div>
+            <p class="eyebrow mb-1.5">Role</p>
+            <p>{d.role}</p>
+          </div>
+          <div>
+            <p class="eyebrow mb-1.5">Stack</p>
+            <ul class="flex flex-wrap gap-1.5">{d.stack.map((s) => <li class="chip">{s}</li>)}</ul>
+          </div>
+        </div>
+        {
+          d.links.length > 0 && (
+            <div class="mt-6 flex flex-wrap gap-2">
+              {d.links.map((l) => (
+                <a href={l.href} class="btn btn-ghost h-9 text-sm">
+                  {l.label}
+                  <Icon name="arrow-up-right" size={14} />
+                </a>
+              ))}
+            </div>
+          )
+        }
+      </div>
+    </header>
+
+    <div class="container-page grid gap-12 pt-12 lg:grid-cols-[13rem_minmax(0,1fr)]">
+      <aside class="hidden lg:block">
+        <nav class="sticky top-24" aria-label="On this page">
+          <p class="eyebrow mb-3">On this page</p>
+          <ul class="space-y-2 border-l border-line text-[0.85rem]">
+            {
+              toc.map((h) => (
+                <li>
+                  <a href={`#${h.slug}`} data-toc={h.slug} class="-ml-px block border-l border-transparent pl-3 text-faint transition-colors hover:text-fg">
+                    {h.text}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </aside>
+
+      <div class="prose-case max-w-[46rem]">
+        <Content />
+      </div>
+    </div>
+
+    <nav class="container-page mt-20" aria-label="Next case study">
+      <a href={`/work/${next.id}`} class="group card flex items-center justify-between gap-6 p-6 transition-colors hover:border-line-strong">
+        <div>
+          <p class="eyebrow">Next case study</p>
+          <p class="mt-2 text-xl font-semibold tracking-tight">{next.data.title}</p>
+          <p class="mt-1 text-sm text-muted">{next.data.kicker}</p>
+        </div>
+        <Icon name="arrow-right" size={22} class="shrink-0 text-faint transition-transform group-hover:translate-x-1 group-hover:text-accent" />
+      </a>
+    </nav>
+  </article>
+</Base>
+
+<script>
+  // Highlight the section currently in view in the table of contents.
+  const links = new Map<string, HTMLElement>();
+  document.querySelectorAll<HTMLElement>('[data-toc]').forEach((a) => links.set(a.dataset.toc!, a));
+  if (links.size) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (!e.isIntersecting) continue;
+          links.forEach((a) => a.classList.remove('text-fg!', 'border-accent!'));
+          links.get(e.target.id)?.classList.add('text-fg!', 'border-accent!');
+        }
+      },
+      { rootMargin: '-20% 0px -70% 0px' },
+    );
+    document.querySelectorAll('.prose-case h2[id]').forEach((h) => io.observe(h));
+  }
+</script>

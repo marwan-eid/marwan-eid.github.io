@@ -1,0 +1,62 @@
+---
+title: 'Moving a 75k-line desktop app to the web'
+kicker: 'Valeo · modernization'
+summary: 'An incremental migration of a legacy C# desktop application for vehicle lifecycle management to modular ASP.NET APIs and a React frontend, done without ever stopping the people who depend on it.'
+order: 4
+period: 'Jul 2022 – Jul 2023'
+role: 'Junior Software Engineer: API extraction and frontend'
+stack: ['C#', 'ASP.NET MVC', 'REST', 'React', 'Redux', 'Postman', 'Unit testing']
+metrics:
+  - { value: '75k+', label: 'lines of legacy C#' }
+  - { value: '2+ years', label: 'in production' }
+  - { value: 'Hundreds', label: 'of internal users' }
+---
+
+import Diagram from '../../components/Diagram.tsx';
+import { legacyMigration } from '../../data/diagrams';
+
+## The problem
+
+Valeo managed the lifecycle of vehicle programs for manufacturers such as **VW, Volvo and HKM** in a desktop application: more than **75,000 lines of C#**, grown over years. It worked, but it was hard to change, hard to deploy to every user's machine, and tied to Windows desktops.
+
+Replacing it all at once would have meant months with no new features, a risky cut-over day, and hundreds of internal users stuck if anything went wrong. So we didn't.
+
+## The approach: migrate one module at a time
+
+The migration followed the **strangler fig** pattern. The new system grows around the old one, a module at a time, until the old one can be removed. Play the walkthrough to see the sequence:
+
+<Diagram client:visible {...legacyMigration} />
+
+## Key decisions
+
+### API first, then UI
+
+For each module, the business logic was extracted into a **modular ASP.NET MVC REST API** before any new screens were built. That forced a clean boundary between logic and presentation, and meant each API could be tested on its own.
+
+### Tested at the boundary
+
+Every extracted API was covered by **unit tests** and validated with **Postman** before users were moved to it. When you're reimplementing behavior people depend on daily, the API contract is the thing to pin down.
+
+### Components that compound
+
+The new frontend is **React with Redux**, built from modular, reusable components, so later modules could reuse forms, tables and workflows instead of rebuilding them.
+
+### Nobody stops working
+
+Users moved to the web module by module, while the desktop app kept serving everything not yet migrated. There was never a big-bang cut-over, and never a day the team couldn't do its job.
+
+## Results
+
+- The web version has been **in production for over two years**.
+- It serves **hundreds of internal users** across vehicle programs.
+- New features ship to a browser instead of being rolled out to desktops.
+
+## Also that year: real-time diagnostics
+
+Alongside the migration, I built a **real-time diagnostics application in C#** with an extensible, **configuration-driven architecture**. Each client's specification lives in configuration rather than code, so supporting a new client means writing a spec, not a fork.
+
+## What I took away
+
+- **Incremental beats heroic.** Many small, reversible steps delivered more, with less risk, than one big rewrite could have.
+- **Boundaries first.** Extracting clean APIs was the real work. The new UI was the easy part once they existed.
+- **Legacy code is a specification.** Years of edge cases live in it, so treat it as the source of truth for behavior until tests say otherwise.

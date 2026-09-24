@@ -1,0 +1,59 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import WorkCard from '../../components/WorkCard.astro';
+import Icon from '../../components/Icon.astro';
+import { profile } from '../../data/profile';
+
+const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<Base title="Work" description="Case studies in real-time systems, performance and modernization, written like design docs." og="work">
+  <section class="container-page pt-14 sm:pt-20">
+    <p class="eyebrow">Work</p>
+    <h1 class="mt-3 max-w-3xl text-4xl font-semibold tracking-[-0.03em] text-balance sm:text-5xl">
+      Problems, decisions, and <span class="serif-accent text-accent">what happened next.</span>
+    </h1>
+    <p class="mt-5 max-w-2xl text-[1.05rem] leading-relaxed text-muted">
+      Each case study covers the constraints, the architecture, the decisions I made (and why), and the results. Most include an interactive
+      diagram you can step through. Code for Valeo work is private, so those pages focus on design.
+    </p>
+  </section>
+
+  <section class="container-page mt-12 grid gap-4 md:grid-cols-2">
+    {work.map((entry, i) => <WorkCard entry={entry} size={i === 0 ? 'lg' : 'md'} live={entry.id === 'milkrun'} />)}
+  </section>
+
+  <section class="container-page mt-16">
+    <h2 class="eyebrow mb-4">Also</h2>
+    <ul class="divide-y divide-line border-y border-line">
+      <li>
+        <a href={profile.links.paper} class="group flex items-center justify-between gap-6 py-4">
+          <span>
+            <span class="font-medium">The Right Losses for the Right Gains</span>
+            <span class="ml-2 text-sm text-muted">arXiv paper on text-to-image generation, 44% better FID than baselines</span>
+          </span>
+          <Icon name="arrow-up-right" size={16} class="shrink-0 text-faint group-hover:text-accent" />
+        </a>
+      </li>
+      <li>
+        <a href="https://github.com/marwan-eid/Web-Application-and-Database-System-Backend-for-Egyptian-movies" class="group flex items-center justify-between gap-6 py-4">
+          <span>
+            <span class="font-medium">Mini Egyptian IMDB</span>
+            <span class="ml-2 text-sm text-muted">web crawler, database and web app for Egyptian movie data</span>
+          </span>
+          <Icon name="arrow-up-right" size={16} class="shrink-0 text-faint group-hover:text-accent" />
+        </a>
+      </li>
+      <li>
+        <a href="https://github.com/marwan-eid/Lee-Maze-Router" class="group flex items-center justify-between gap-6 py-4">
+          <span>
+            <span class="font-medium">Lee Maze Router</span>
+            <span class="ml-2 text-sm text-muted">Lee-algorithm maze routing with a Python visualizer</span>
+          </span>
+          <Icon name="arrow-up-right" size={16} class="shrink-0 text-faint group-hover:text-accent" />
+        </a>
+      </li>
+    </ul>
+  </section>
+</Base>

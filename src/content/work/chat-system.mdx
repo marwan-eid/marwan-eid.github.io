@@ -1,0 +1,69 @@
+---
+title: 'A chat API built for concurrent writes'
+kicker: 'Backend challenge · open source'
+summary: 'A chat API split into a Go write path and a Rails read path, with Redis for race-free numbering, Sidekiq for async persistence and Elasticsearch for search. Writes average 3–5 ms under a 1,000-user load test.'
+order: 5
+period: 'Nov 2025'
+role: 'Solo: design, implementation, load testing'
+stack: ['Go', 'Ruby on Rails', 'Redis', 'Sidekiq', 'MySQL', 'Elasticsearch', 'Docker', 'RSpec', 'JMeter']
+metrics:
+  - { value: '3.5 ms', label: 'avg. create chat' }
+  - { value: '4.6 ms', label: 'avg. create message' }
+  - { value: '0%', label: 'errors, 1,000 users' }
+links:
+  - { label: 'Source on GitHub', href: 'https://github.com/marwan-eid/chat-system' }
+---
+
+import Diagram from '../../components/Diagram.tsx';
+import { chatSystem } from '../../data/diagrams';
+
+## The problem
+
+This started as a backend challenge for a job application, and I treated it like a production system. The domain is simple: **applications** contain **chats**, and chats contain **messages**. The constraints are what make it interesting:
+
+- Chats are numbered **1, 2, 3…** within each application, and messages within each chat. Numbers must be unique and sequential **even with many servers handling requests concurrently**.
+- Writes should be fast, and a burst of writes shouldn't hurt reads.
+- Messages must be **full-text searchable** within a chat.
+- Each application and chat shows a count of its children, without that counter becoming a hot spot.
+
+## Architecture
+
+Writes and reads take different paths. Play the walkthrough to follow a message from POST to search results.
+
+<Diagram client:visible {...chatSystem} />
+
+## Key decisions
+
+### A dedicated Go service for writes
+
+Creating chats and messages is the write-heavy, latency-sensitive part, so it gets its own small **Go** service. It validates the parent, reserves a number, enqueues the write and returns **`202 Accepted`** with the number immediately. **Rails** handles everything else: reads, updates, pagination and search.
+
+### Redis INCR for race-free numbering
+
+"Read the max, add one" breaks as soon as two requests run at once. Instead, the Go service calls Redis `INCR` on keys like `chat:{id}:next_message_number`. Redis executes commands atomically, so every concurrent request gets a unique number across any number of writer instances. **Unique composite indexes** on `(chat_id, number)` in MySQL enforce the same rule at the database level as a second line of defense.
+
+### Async persistence with Sidekiq
+
+The database write happens in a **Sidekiq** worker, off the request path, which also indexes the message into **Elasticsearch**. A spike in writes becomes a longer queue instead of slower responses.
+
+### Cached counters instead of hot rows
+
+Updating `messages_count` on every insert would make the chat row a contention point. Counts are refreshed by background workers and a scheduled sync every 15 minutes. The number shown can lag a little, and that's an explicit trade-off.
+
+## Results
+
+A JMeter plan simulated **1,000 concurrent users** creating chats, polling until they were persisted, and posting messages:
+
+| Request | Samples | Errors | Avg. response |
+| --- | --- | --- | --- |
+| Create chat | 875 | 0% | **3.50 ms** |
+| Create message | 836 | 0% | **4.63 ms** |
+| Poll for chat | 1,364 | 0% | 1,145 ms |
+
+The poll time is the async write completing, which is the cost of returning `202` right away.
+
+## Trade-offs I'd flag in review
+
+- **Eventual consistency is visible to clients.** A client must poll until a new chat exists before posting to it. That's fine for this API, but it has to be documented and designed for.
+- **Counts can lag.** Moving counters into Redis with periodic flushes would make them closer to real time.
+- **Production hardening is out of scope.** Rate limiting, authentication, secrets management and API versioning would come next before real traffic.

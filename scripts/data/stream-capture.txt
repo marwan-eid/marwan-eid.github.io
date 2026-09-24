@@ -1,0 +1,621 @@
+id:van-021-1790264320845
+event:van-update
+data:{"van_id":"van-021","route_id":"route-2026-09-24-van-021-1790263962","location":{"latitude":52.380295,"longitude":4.895426},"speed_kmh":23.5,"heading_degrees":213.3,"battery_pct":91,"status":"EN_ROUTE","current_stop_index":1,"total_stops":22,"eta_next_stop_seconds":177,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Central Station Traffic","last_updated":"2026-09-24T15:38:40.845150104Z"}
+
+id:van-032-1790264321940
+event:van-update
+data:{"van_id":"van-032","route_id":"route-2026-09-24-van-032-1790261904","location":{"latitude":52.347824,"longitude":4.918316},"speed_kmh":23.5,"heading_degrees":102.3,"battery_pct":59,"status":"EN_ROUTE","current_stop_index":13,"total_stops":18,"eta_next_stop_seconds":153,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:38:41.940278727Z"}
+
+id:van-003-1790264322943
+event:van-update
+data:{"van_id":"van-003","route_id":"route-2026-09-24-van-003-1790261111","location":{"latitude":52.32861,"longitude":4.88825},"speed_kmh":20.9,"heading_degrees":66.7,"battery_pct":54,"status":"EN_ROUTE","current_stop_index":15,"total_stops":21,"eta_next_stop_seconds":221,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:38:42.943600868Z"}
+
+id:van-045-1790264323060
+event:van-update
+data:{"van_id":"van-045","route_id":"route-2026-09-24-van-045-1790263658","location":{"latitude":52.360307,"longitude":4.91001},"speed_kmh":24.4,"heading_degrees":275.1,"battery_pct":90,"status":"EN_ROUTE","current_stop_index":3,"total_stops":21,"eta_next_stop_seconds":147,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:38:43.060546878Z"}
+
+id:van-017-1790264325953
+event:van-update
+data:{"van_id":"van-017","route_id":"route-2026-09-24-van-017-1790263174","location":{"latitude":52.389645,"longitude":4.919476},"speed_kmh":23.9,"heading_degrees":226.5,"battery_pct":77,"status":"EN_ROUTE","current_stop_index":6,"total_stops":18,"eta_next_stop_seconds":194,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:38:45.953008701Z"}
+
+id:van-006-1790264328147
+event:van-update
+data:{"van_id":"van-006","route_id":"route-2026-09-24-van-006-1790261523","location":{"latitude":52.373696,"longitude":4.932174},"speed_kmh":22.8,"heading_degrees":134.4,"battery_pct":51,"status":"EN_ROUTE","current_stop_index":17,"total_stops":20,"eta_next_stop_seconds":179,"sla_risk":"CRITICAL","confidence":"INTERPOLATED","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:38:48.147688631Z"}
+
+id:van-019-1790264334356
+event:van-update
+data:{"van_id":"van-019","route_id":"route-2026-09-24-van-019-1790262775","location":{"latitude":52.337589,"longitude":4.891492},"speed_kmh":21.0,"heading_degrees":251.2,"battery_pct":76,"status":"EN_ROUTE","current_stop_index":3,"total_stops":21,"eta_next_stop_seconds":139,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:38:54.356828261Z"}
+
+id:van-001-1790264334861
+event:van-update
+data:{"van_id":"van-001","route_id":"route-2026-09-24-van-001-1790261874","location":{"latitude":52.339829,"longitude":4.908282},"speed_kmh":21.4,"heading_degrees":326.0,"battery_pct":62,"status":"EN_ROUTE","current_stop_index":8,"total_stops":21,"eta_next_stop_seconds":127,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:38:54.861274116Z"}
+
+event:heartbeat
+:keepalive
+
+id:van-000-1790264336457
+event:van-update
+data:{"van_id":"van-000","route_id":"route-2026-09-24-van-000-1790261640","location":{"latitude":52.384854,"longitude":4.923381},"speed_kmh":0.0,"heading_degrees":188.7,"battery_pct":62,"status":"DELIVERING","current_stop_index":15,"total_stops":18,"eta_next_stop_seconds":277,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:38:56.457266492Z"}
+
+id:van-045-1790264337561
+event:van-update
+data:{"van_id":"van-045","route_id":"route-2026-09-24-van-045-1790263658","location":{"latitude":52.363011,"longitude":4.880116},"speed_kmh":24.8,"heading_degrees":326.3,"battery_pct":88,"status":"EN_ROUTE","current_stop_index":3,"total_stops":21,"eta_next_stop_seconds":161,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Vondelpark Construction","last_updated":"2026-09-24T15:38:57.561201386Z"}
+
+id:van-015-1790264338259
+event:van-update
+data:{"van_id":"van-015","route_id":"route-2026-09-24-van-015-1790262375","location":{"latitude":52.304856,"longitude":4.853738},"speed_kmh":0.0,"heading_degrees":33.6,"battery_pct":66,"status":"DELIVERING","current_stop_index":10,"total_stops":18,"eta_next_stop_seconds":227,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:38:58.259252374Z"}
+
+id:van-013-1790264340690
+event:van-update
+data:{"van_id":"van-013","route_id":"route-2026-09-24-van-013-1790262412","location":{"latitude":52.346144,"longitude":4.904898},"speed_kmh":0.0,"heading_degrees":77.4,"battery_pct":81,"status":"DELIVERING","current_stop_index":4,"total_stops":21,"eta_next_stop_seconds":236,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"De Pijp School Zone","last_updated":"2026-09-24T15:39:00.690032790Z"}
+
+id:van-017-1790264341381
+event:van-update
+data:{"van_id":"van-017","route_id":"route-2026-09-24-van-017-1790263174","location":{"latitude":52.379064,"longitude":4.902805},"speed_kmh":22.3,"heading_degrees":300.9,"battery_pct":76,"status":"EN_ROUTE","current_stop_index":6,"total_stops":18,"eta_next_stop_seconds":206,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Central Station Traffic","last_updated":"2026-09-24T15:39:01.381406717Z"}
+
+id:van-002-1790264341552
+event:van-update
+data:{"van_id":"van-002","route_id":"route-2026-09-24-van-002-1790263252","location":{"latitude":52.361145,"longitude":4.886574},"speed_kmh":22.5,"heading_degrees":186.3,"battery_pct":71,"status":"EN_ROUTE","current_stop_index":8,"total_stops":21,"eta_next_stop_seconds":242,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"De Pijp School Zone","last_updated":"2026-09-24T15:39:01.552106911Z"}
+
+id:van-025-1790264341854
+event:van-update
+data:{"van_id":"van-025","route_id":"route-2026-09-24-van-025-1790262877","location":{"latitude":52.354786,"longitude":4.901351},"speed_kmh":20.3,"heading_degrees":60.0,"battery_pct":70,"status":"EN_ROUTE","current_stop_index":7,"total_stops":17,"eta_next_stop_seconds":288,"sla_risk":"CRITICAL","confidence":"INTERPOLATED","in_geofence":true,"geofence_name":"De Pijp School Zone","last_updated":"2026-09-24T15:39:01.854588945Z"}
+
+id:van-008-1790264341858
+event:van-update
+data:{"van_id":"van-008","route_id":"route-2026-09-24-van-008-1790261745","location":{"latitude":52.359389,"longitude":4.886437},"speed_kmh":27.9,"heading_degrees":183.5,"battery_pct":62,"status":"EN_ROUTE","current_stop_index":15,"total_stops":16,"eta_next_stop_seconds":329,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"De Pijp School Zone","last_updated":"2026-09-24T15:39:01.858351802Z"}
+
+id:van-000-1790264343959
+event:van-update
+data:{"van_id":"van-000","route_id":"route-2026-09-24-van-000-1790261640","location":{"latitude":52.387615,"longitude":4.923902},"speed_kmh":26.9,"heading_degrees":300.5,"battery_pct":62,"status":"EN_ROUTE","current_stop_index":16,"total_stops":18,"eta_next_stop_seconds":213,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:39:03.959747867Z"}
+
+id:van-015-1790264345761
+event:van-update
+data:{"van_id":"van-015","route_id":"route-2026-09-24-van-015-1790262375","location":{"latitude":52.322877,"longitude":4.805049},"speed_kmh":23.7,"heading_degrees":321.9,"battery_pct":64,"status":"EN_ROUTE","current_stop_index":11,"total_stops":18,"eta_next_stop_seconds":196,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:39:05.761633620Z"}
+
+id:van-010-1790264345852
+event:van-update
+data:{"van_id":"van-010","route_id":"route-2026-09-24-van-010-1790262799","location":{"latitude":52.299119,"longitude":4.866897},"speed_kmh":23.3,"heading_degrees":289.2,"battery_pct":72,"status":"EN_ROUTE","current_stop_index":6,"total_stops":19,"eta_next_stop_seconds":141,"sla_risk":"CRITICAL","confidence":"STALE","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:39:05.852516905Z"}
+
+id:van-006-1790264347067
+event:van-update
+data:{"van_id":"van-006","route_id":"route-2026-09-24-van-006-1790261523","location":{"latitude":52.361921,"longitude":4.939642},"speed_kmh":29.6,"heading_degrees":168.3,"battery_pct":50,"status":"EN_ROUTE","current_stop_index":17,"total_stops":20,"eta_next_stop_seconds":150,"sla_risk":"CRITICAL","confidence":"INTERPOLATED","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:39:07.067665730Z"}
+
+id:van-003-1790264348460
+event:van-update
+data:{"van_id":"van-003","route_id":"route-2026-09-24-van-003-1790261111","location":{"latitude":52.346972,"longitude":4.927026},"speed_kmh":22.8,"heading_degrees":318.0,"battery_pct":53,"status":"EN_ROUTE","current_stop_index":15,"total_stops":21,"eta_next_stop_seconds":185,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:39:08.460534371Z"}
+
+id:van-045-1790264349069
+event:van-update
+data:{"van_id":"van-045","route_id":"route-2026-09-24-van-045-1790263658","location":{"latitude":52.362443,"longitude":4.873842},"speed_kmh":22.6,"heading_degrees":248.1,"battery_pct":87,"status":"EN_ROUTE","current_stop_index":3,"total_stops":21,"eta_next_stop_seconds":176,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Vondelpark Construction","last_updated":"2026-09-24T15:39:09.069841051Z"}
+
+id:van-012-1790264349076
+event:van-update
+data:{"van_id":"van-012","route_id":"route-2026-09-24-van-012-1790259500","location":{"latitude":52.375207,"longitude":4.886146},"speed_kmh":0.0,"heading_degrees":117.9,"battery_pct":7,"status":"DELIVERING","current_stop_index":17,"total_stops":18,"eta_next_stop_seconds":229,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Central Station Traffic","last_updated":"2026-09-24T15:39:09.076941121Z"}
+
+id:van-046-1790264349949
+event:van-update
+data:{"van_id":"van-046","route_id":"route-2026-09-24-van-046-1790261077","location":{"latitude":52.35746,"longitude":4.910112},"speed_kmh":21.3,"heading_degrees":158.8,"battery_pct":46,"status":"EN_ROUTE","current_stop_index":16,"total_stops":17,"eta_next_stop_seconds":183,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:39:09.949455753Z"}
+
+event:heartbeat
+:keepalive
+
+id:van-008-1790264350857
+event:van-update
+data:{"van_id":"van-008","route_id":"route-2026-09-24-van-008-1790261745","location":{"latitude":52.34502,"longitude":4.901539},"speed_kmh":0.0,"heading_degrees":239.1,"battery_pct":62,"status":"DELIVERING","current_stop_index":15,"total_stops":16,"eta_next_stop_seconds":383,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"De Pijp School Zone","last_updated":"2026-09-24T15:39:10.857052586Z"}
+
+id:van-003-1790264350962
+event:van-update
+data:{"van_id":"van-003","route_id":"route-2026-09-24-van-003-1790261111","location":{"latitude":52.348591,"longitude":4.918716},"speed_kmh":24.9,"heading_degrees":302.8,"battery_pct":52,"status":"EN_ROUTE","current_stop_index":15,"total_stops":21,"eta_next_stop_seconds":160,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:39:10.962239367Z"}
+
+id:van-026-1790264351363
+event:van-update
+data:{"van_id":"van-026","route_id":"route-2026-09-24-van-026-1790262561","location":{"latitude":52.35077,"longitude":4.878952},"speed_kmh":28.8,"heading_degrees":16.3,"battery_pct":76,"status":"EN_ROUTE","current_stop_index":8,"total_stops":22,"eta_next_stop_seconds":156,"sla_risk":"CRITICAL","confidence":"INTERPOLATED","in_geofence":true,"geofence_name":"Vondelpark Construction","last_updated":"2026-09-24T15:39:11.363666725Z"}
+
+id:van-030-1790264351561
+event:van-update
+data:{"van_id":"van-030","route_id":"route-2026-09-24-van-030-1790263505","location":{"latitude":52.379699,"longitude":4.894775},"speed_kmh":21.4,"heading_degrees":180.0,"battery_pct":89,"status":"EN_ROUTE","current_stop_index":3,"total_stops":15,"eta_next_stop_seconds":216,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Central Station Traffic","last_updated":"2026-09-24T15:39:11.561559687Z"}
+
+id:van-026-1790264353366
+event:van-update
+data:{"van_id":"van-026","route_id":"route-2026-09-24-van-026-1790262561","location":{"latitude":52.374619,"longitude":4.880825},"speed_kmh":0.0,"heading_degrees":69.2,"battery_pct":72,"status":"DELIVERING","current_stop_index":8,"total_stops":22,"eta_next_stop_seconds":187,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Jordaan Narrow Streets","last_updated":"2026-09-24T15:39:13.366948627Z"}
+
+id:van-023-1790264353564
+event:van-update
+data:{"van_id":"van-023","route_id":"route-2026-09-24-van-023-1790263600","location":{"latitude":52.370897,"longitude":4.898369},"speed_kmh":0.0,"heading_degrees":210.7,"battery_pct":85,"status":"DELIVERING","current_stop_index":2,"total_stops":20,"eta_next_stop_seconds":142,"sla_risk":"CRITICAL","confidence":"INTERPOLATED","in_geofence":true,"geofence_name":"Central Station Traffic","last_updated":"2026-09-24T15:39:13.564122440Z"}
+
+id:van-047-1790264354667
+event:van-update
+data:{"van_id":"van-047","route_id":"route-2026-09-24-van-047-1790262283","location":{"latitude":52.338339,"longitude":4.876504},"speed_kmh":20.9,"heading_degrees":185.1,"battery_pct":55,"status":"EN_ROUTE","current_stop_index":10,"total_stops":17,"eta_next_stop_seconds":235,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:39:14.667078884Z"}
+
+id:van-029-1790264354879
+event:van-update
+data:{"van_id":"van-029","route_id":"route-2026-09-24-van-029-1790262921","location":{"latitude":52.382526,"longitude":4.910548},"speed_kmh":24.0,"heading_degrees":359.8,"battery_pct":78,"status":"EN_ROUTE","current_stop_index":9,"total_stops":20,"eta_next_stop_seconds":272,"sla_risk":"CRITICAL","confidence":"INTERPOLATED","in_geofence":true,"geofence_name":"Central Station Traffic","last_updated":"2026-09-24T15:39:14.879687944Z"}
+
+id:van-038-1790264357365
+event:van-update
+data:{"van_id":"van-038","route_id":"route-2026-09-24-van-038-1790259427","location":{"latitude":52.370807,"longitude":4.898863},"speed_kmh":24.8,"heading_degrees":28.3,"battery_pct":5,"status":"EN_ROUTE","current_stop_index":13,"total_stops":17,"eta_next_stop_seconds":177,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Central Station Traffic","last_updated":"2026-09-24T15:39:17.365113958Z"}
+
+id:van-026-1790264358869
+event:van-update
+data:{"van_id":"van-026","route_id":"route-2026-09-24-van-026-1790262561","location":{"latitude":52.374619,"longitude":4.880825},"speed_kmh":0.0,"heading_degrees":69.2,"battery_pct":72,"status":"DELIVERING","current_stop_index":8,"total_stops":22,"eta_next_stop_seconds":222,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Jordaan Narrow Streets","last_updated":"2026-09-24T15:39:18.869393212Z"}
+
+id:van-027-1790264359642
+event:van-update
+data:{"van_id":"van-027","route_id":"route-2026-09-24-van-027-1790263523","location":{"latitude":52.348702,"longitude":4.904261},"speed_kmh":25.4,"heading_degrees":167.2,"battery_pct":87,"status":"EN_ROUTE","current_stop_index":4,"total_stops":19,"eta_next_stop_seconds":151,"sla_risk":"CRITICAL","confidence":"INTERPOLATED","in_geofence":true,"geofence_name":"De Pijp School Zone","last_updated":"2026-09-24T15:39:19.642116109Z"}
+
+id:van-044-1790264360568
+event:van-update
+data:{"van_id":"van-044","route_id":"route-2026-09-24-van-044-1790260914","location":{"latitude":52.370462,"longitude":4.961718},"speed_kmh":26.1,"heading_degrees":180.2,"battery_pct":44,"status":"RETURNING","current_stop_index":21,"total_stops":21,"eta_next_stop_seconds":142,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:39:20.568773929Z"}
+
+id:van-026-1790264363868
+event:van-update
+data:{"van_id":"van-026","route_id":"route-2026-09-24-van-026-1790262561","location":{"latitude":52.374619,"longitude":4.880825},"speed_kmh":0.0,"heading_degrees":69.2,"battery_pct":72,"status":"DELIVERING","current_stop_index":8,"total_stops":22,"eta_next_stop_seconds":261,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Jordaan Narrow Streets","last_updated":"2026-09-24T15:39:23.868157512Z"}
+
+id:van-030-1790264364066
+event:van-update
+data:{"van_id":"van-030","route_id":"route-2026-09-24-van-030-1790263505","location":{"latitude":52.370357,"longitude":4.884734},"speed_kmh":0.0,"heading_degrees":273.8,"battery_pct":88,"status":"DELIVERING","current_stop_index":3,"total_stops":15,"eta_next_stop_seconds":262,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Vondelpark Construction","last_updated":"2026-09-24T15:39:24.066917543Z"}
+
+id:van-046-1790264364952
+event:van-update
+data:{"van_id":"van-046","route_id":"route-2026-09-24-van-046-1790261077","location":{"latitude":52.359409,"longitude":4.925438},"speed_kmh":0.0,"heading_degrees":67.4,"battery_pct":46,"status":"DELIVERING","current_stop_index":16,"total_stops":17,"eta_next_stop_seconds":214,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:39:24.952600546Z"}
+
+event:heartbeat
+:keepalive
+
+id:van-046-1790264367452
+event:van-update
+data:{"van_id":"van-046","route_id":"route-2026-09-24-van-046-1790261077","location":{"latitude":52.359409,"longitude":4.925438},"speed_kmh":0.0,"heading_degrees":67.4,"battery_pct":46,"status":"DELIVERING","current_stop_index":16,"total_stops":17,"eta_next_stop_seconds":246,"sla_risk":"CRITICAL","confidence":"INTERPOLATED","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:39:27.452593717Z"}
+
+id:van-011-1790264368160
+event:van-update
+data:{"van_id":"van-011","route_id":"route-2026-09-24-van-011-1790260904","location":{"latitude":52.374076,"longitude":4.898885},"speed_kmh":21.0,"heading_degrees":38.0,"battery_pct":39,"status":"EN_ROUTE","current_stop_index":13,"total_stops":19,"eta_next_stop_seconds":220,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Central Station Traffic","last_updated":"2026-09-24T15:39:28.160015231Z"}
+
+id:van-040-1790264369476
+event:van-update
+data:{"van_id":"van-040","route_id":"route-2026-09-24-van-040-1790260682","location":{"latitude":52.327023,"longitude":4.799499},"speed_kmh":26.4,"heading_degrees":344.1,"battery_pct":22,"status":"EN_ROUTE","current_stop_index":14,"total_stops":22,"eta_next_stop_seconds":128,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:39:29.476118423Z"}
+
+id:van-039-1790264371880
+event:van-update
+data:{"van_id":"van-039","route_id":"route-2026-09-24-van-039-1790262891","location":{"latitude":52.364057,"longitude":4.927916},"speed_kmh":0.0,"heading_degrees":251.1,"battery_pct":67,"status":"DELIVERING","current_stop_index":5,"total_stops":20,"eta_next_stop_seconds":160,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:39:31.880091775Z"}
+
+id:van-037-1790264372371
+event:van-update
+data:{"van_id":"van-037","route_id":"route-2026-09-24-van-037-1790262236","location":{"latitude":52.360554,"longitude":4.930119},"speed_kmh":24.9,"heading_degrees":249.7,"battery_pct":59,"status":"EN_ROUTE","current_stop_index":13,"total_stops":17,"eta_next_stop_seconds":186,"sla_risk":"CRITICAL","confidence":"INTERPOLATED","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:39:32.371628110Z"}
+
+id:van-014-1790264372956
+event:van-update
+data:{"van_id":"van-014","route_id":"route-2026-09-24-van-014-1790263444","location":{"latitude":52.380348,"longitude":4.898802},"speed_kmh":25.5,"heading_degrees":121.0,"battery_pct":82,"status":"EN_ROUTE","current_stop_index":4,"total_stops":15,"eta_next_stop_seconds":271,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Central Station Traffic","last_updated":"2026-09-24T15:39:32.956072181Z"}
+
+id:van-015-1790264373763
+event:van-update
+data:{"van_id":"van-015","route_id":"route-2026-09-24-van-015-1790262375","location":{"latitude":52.338241,"longitude":4.828587},"speed_kmh":29.9,"heading_degrees":90.9,"battery_pct":64,"status":"EN_ROUTE","current_stop_index":11,"total_stops":18,"eta_next_stop_seconds":157,"sla_risk":"CRITICAL","confidence":"INTERPOLATED","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:39:33.763299056Z"}
+
+id:van-026-1790264374948
+event:van-update
+data:{"van_id":"van-026","route_id":"route-2026-09-24-van-026-1790262561","location":{"latitude":52.374619,"longitude":4.880825},"speed_kmh":0.0,"heading_degrees":69.2,"battery_pct":72,"status":"DELIVERING","current_stop_index":8,"total_stops":22,"eta_next_stop_seconds":304,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Jordaan Narrow Streets","last_updated":"2026-09-24T15:39:34.948068689Z"}
+
+id:van-012-1790264377170
+event:van-update
+data:{"van_id":"van-012","route_id":"route-2026-09-24-van-012-1790259500","location":{"latitude":52.358106,"longitude":4.953063},"speed_kmh":0.0,"heading_degrees":0.0,"battery_pct":5,"status":"RETURNED","current_stop_index":18,"total_stops":18,"eta_next_stop_seconds":217,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:39:37.170443999Z"}
+
+id:van-033-1790264378757
+event:van-update
+data:{"van_id":"van-033","route_id":"route-2026-09-24-van-033-1790260229","location":{"latitude":52.384046,"longitude":4.911018},"speed_kmh":23.7,"heading_degrees":21.7,"battery_pct":38,"status":"EN_ROUTE","current_stop_index":19,"total_stops":22,"eta_next_stop_seconds":192,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Central Station Traffic","last_updated":"2026-09-24T15:39:38.757894040Z"}
+
+event:heartbeat
+:keepalive
+
+id:van-040-1790264380638
+event:van-update
+data:{"van_id":"van-040","route_id":"route-2026-09-24-van-040-1790260682","location":{"latitude":52.367906,"longitude":4.903568},"speed_kmh":21.4,"heading_degrees":329.8,"battery_pct":20,"status":"EN_ROUTE","current_stop_index":16,"total_stops":22,"eta_next_stop_seconds":140,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Central Station Traffic","last_updated":"2026-09-24T15:39:40.638493882Z"}
+
+id:van-026-1790264381988
+event:van-update
+data:{"van_id":"van-026","route_id":"route-2026-09-24-van-026-1790262561","location":{"latitude":52.374619,"longitude":4.880825},"speed_kmh":0.0,"heading_degrees":69.2,"battery_pct":72,"status":"DELIVERING","current_stop_index":8,"total_stops":22,"eta_next_stop_seconds":350,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Jordaan Narrow Streets","last_updated":"2026-09-24T15:39:41.988819319Z"}
+
+id:van-016-1790264382492
+event:van-update
+data:{"van_id":"van-016","route_id":"route-2026-09-24-van-016-1790262512","location":{"latitude":52.351954,"longitude":4.937036},"speed_kmh":0.0,"heading_degrees":49.0,"battery_pct":75,"status":"DELIVERING","current_stop_index":5,"total_stops":21,"eta_next_stop_seconds":334,"sla_risk":"CRITICAL","confidence":"INTERPOLATED","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:39:42.492540565Z"}
+
+id:van-017-1790264383491
+event:van-update
+data:{"van_id":"van-017","route_id":"route-2026-09-24-van-017-1790263174","location":{"latitude":52.379823,"longitude":4.894831},"speed_kmh":22.4,"heading_degrees":204.3,"battery_pct":76,"status":"EN_ROUTE","current_stop_index":6,"total_stops":18,"eta_next_stop_seconds":216,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Central Station Traffic","last_updated":"2026-09-24T15:39:43.491206215Z"}
+
+id:van-038-1790264384990
+event:van-update
+data:{"van_id":"van-038","route_id":"route-2026-09-24-van-038-1790259427","location":{"latitude":52.348549,"longitude":4.918331},"speed_kmh":24.0,"heading_degrees":151.1,"battery_pct":5,"status":"EN_ROUTE","current_stop_index":13,"total_stops":17,"eta_next_stop_seconds":166,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:39:44.990071911Z"}
+
+id:van-005-1790264386491
+event:van-update
+data:{"van_id":"van-005","route_id":"route-2026-09-24-van-005-1790260626","location":{"latitude":52.328494,"longitude":4.914789},"speed_kmh":25.5,"heading_degrees":267.6,"battery_pct":25,"status":"EN_ROUTE","current_stop_index":16,"total_stops":19,"eta_next_stop_seconds":169,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:39:46.491277733Z"}
+
+id:van-008-1790264387991
+event:van-update
+data:{"van_id":"van-008","route_id":"route-2026-09-24-van-008-1790261745","location":{"latitude":52.34502,"longitude":4.901539},"speed_kmh":0.0,"heading_degrees":239.1,"battery_pct":62,"status":"DELIVERING","current_stop_index":15,"total_stops":16,"eta_next_stop_seconds":441,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"De Pijp School Zone","last_updated":"2026-09-24T15:39:47.991850949Z"}
+
+id:van-041-1790264388644
+event:van-update
+data:{"van_id":"van-041","route_id":"route-2026-09-24-van-041-1790263559","location":{"latitude":52.36389,"longitude":4.89818},"speed_kmh":24.8,"heading_degrees":167.4,"battery_pct":82,"status":"EN_ROUTE","current_stop_index":4,"total_stops":14,"eta_next_stop_seconds":249,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"De Pijp School Zone","last_updated":"2026-09-24T15:39:48.644924039Z"}
+
+id:van-009-1790264388753
+event:van-update
+data:{"van_id":"van-009","route_id":"route-2026-09-24-van-009-1790263872","location":{"latitude":52.315474,"longitude":4.81494},"speed_kmh":25.9,"heading_degrees":333.9,"battery_pct":83,"status":"EN_ROUTE","current_stop_index":1,"total_stops":21,"eta_next_stop_seconds":118,"sla_risk":"WARNING","confidence":"INTERPOLATED","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:39:48.753111775Z"}
+
+id:van-024-1790264389753
+event:van-update
+data:{"van_id":"van-024","route_id":"route-2026-09-24-van-024-1790261660","location":{"latitude":52.335979,"longitude":4.808444},"speed_kmh":29.0,"heading_degrees":48.9,"battery_pct":54,"status":"EN_ROUTE","current_stop_index":10,"total_stops":22,"eta_next_stop_seconds":101,"sla_risk":"WARNING","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:39:49.753571720Z"}
+
+id:van-041-1790264391146
+event:van-update
+data:{"van_id":"van-041","route_id":"route-2026-09-24-van-041-1790263559","location":{"latitude":52.360636,"longitude":4.899457},"speed_kmh":20.9,"heading_degrees":188.7,"battery_pct":82,"status":"EN_ROUTE","current_stop_index":4,"total_stops":14,"eta_next_stop_seconds":258,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"De Pijp School Zone","last_updated":"2026-09-24T15:39:51.146596779Z"}
+
+id:van-024-1790264392253
+event:van-update
+data:{"van_id":"van-024","route_id":"route-2026-09-24-van-024-1790261660","location":{"latitude":52.364882,"longitude":4.863095},"speed_kmh":24.5,"heading_degrees":67.7,"battery_pct":50,"status":"EN_ROUTE","current_stop_index":10,"total_stops":22,"eta_next_stop_seconds":115,"sla_risk":"WARNING","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Vondelpark Construction","last_updated":"2026-09-24T15:39:52.253694369Z"}
+
+id:van-002-1790264394145
+event:van-update
+data:{"van_id":"van-002","route_id":"route-2026-09-24-van-002-1790263252","location":{"latitude":52.354607,"longitude":4.886403},"speed_kmh":27.5,"heading_degrees":174.6,"battery_pct":71,"status":"EN_ROUTE","current_stop_index":8,"total_stops":21,"eta_next_stop_seconds":218,"sla_risk":"CRITICAL","confidence":"INTERPOLATED","in_geofence":true,"geofence_name":"De Pijp School Zone","last_updated":"2026-09-24T15:39:54.145145109Z"}
+
+id:van-017-1790264394504
+event:van-update
+data:{"van_id":"van-017","route_id":"route-2026-09-24-van-017-1790263174","location":{"latitude":52.373273,"longitude":4.888535},"speed_kmh":29.8,"heading_degrees":276.6,"battery_pct":75,"status":"EN_ROUTE","current_stop_index":6,"total_stops":18,"eta_next_stop_seconds":212,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Central Station Traffic","last_updated":"2026-09-24T15:39:54.504933011Z"}
+
+id:van-010-1790264394992
+event:van-update
+data:{"van_id":"van-010","route_id":"route-2026-09-24-van-010-1790262799","location":{"latitude":52.300491,"longitude":4.855849},"speed_kmh":26.7,"heading_degrees":182.0,"battery_pct":70,"status":"EN_ROUTE","current_stop_index":6,"total_stops":19,"eta_next_stop_seconds":132,"sla_risk":"CRITICAL","confidence":"INTERPOLATED","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:39:54.992262050Z"}
+
+event:heartbeat
+:keepalive
+
+id:van-038-1790264396540
+event:van-update
+data:{"van_id":"van-038","route_id":"route-2026-09-24-van-038-1790259427","location":{"latitude":52.340859,"longitude":4.935782},"speed_kmh":27.0,"heading_degrees":138.8,"battery_pct":5,"status":"EN_ROUTE","current_stop_index":13,"total_stops":17,"eta_next_stop_seconds":153,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:39:56.540523494Z"}
+
+id:van-036-1790264396662
+event:van-update
+data:{"van_id":"van-036","route_id":"route-2026-09-24-van-036-1790263050","location":{"latitude":52.36054,"longitude":4.930057},"speed_kmh":20.2,"heading_degrees":69.7,"battery_pct":82,"status":"EN_ROUTE","current_stop_index":7,"total_stops":14,"eta_next_stop_seconds":298,"sla_risk":"CRITICAL","confidence":"INTERPOLATED","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:39:56.662831661Z"}
+
+id:van-044-1790264397149
+event:van-update
+data:{"van_id":"van-044","route_id":"route-2026-09-24-van-044-1790264268","location":{"latitude":52.335297,"longitude":4.895286},"speed_kmh":20.8,"heading_degrees":313.9,"battery_pct":94,"status":"EN_ROUTE","current_stop_index":0,"total_stops":15,"eta_next_stop_seconds":193,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:39:57.149804086Z"}
+
+id:van-022-1790264400545
+event:van-update
+data:{"van_id":"van-022","route_id":"route-2026-09-24-van-022-1790261843","location":{"latitude":52.371703,"longitude":4.910767},"speed_kmh":23.5,"heading_degrees":126.3,"battery_pct":62,"status":"EN_ROUTE","current_stop_index":12,"total_stops":18,"eta_next_stop_seconds":168,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Central Station Traffic","last_updated":"2026-09-24T15:40:00.545920051Z"}
+
+id:van-010-1790264404552
+event:van-update
+data:{"van_id":"van-010","route_id":"route-2026-09-24-van-010-1790262799","location":{"latitude":52.297378,"longitude":4.847123},"speed_kmh":0.0,"heading_degrees":333.5,"battery_pct":69,"status":"DELIVERING","current_stop_index":6,"total_stops":19,"eta_next_stop_seconds":156,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:40:04.552226971Z"}
+
+id:van-032-1790264404562
+event:van-update
+data:{"van_id":"van-032","route_id":"route-2026-09-24-van-032-1790261904","location":{"latitude":52.345872,"longitude":4.921148},"speed_kmh":20.7,"heading_degrees":83.5,"battery_pct":59,"status":"EN_ROUTE","current_stop_index":13,"total_stops":18,"eta_next_stop_seconds":151,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:40:04.562088345Z"}
+
+id:van-037-1790264405554
+event:van-update
+data:{"van_id":"van-037","route_id":"route-2026-09-24-van-037-1790262236","location":{"latitude":52.356168,"longitude":4.939515},"speed_kmh":25.8,"heading_degrees":215.1,"battery_pct":58,"status":"EN_ROUTE","current_stop_index":14,"total_stops":17,"eta_next_stop_seconds":169,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:40:05.554102164Z"}
+
+id:van-047-1790264406761
+event:van-update
+data:{"van_id":"van-047","route_id":"route-2026-09-24-van-047-1790262283","location":{"latitude":52.346935,"longitude":4.876957},"speed_kmh":20.5,"heading_degrees":1.2,"battery_pct":54,"status":"EN_ROUTE","current_stop_index":11,"total_stops":17,"eta_next_stop_seconds":213,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:40:06.761088785Z"}
+
+id:van-043-1790264406738
+event:van-update
+data:{"van_id":"van-043","route_id":"route-2026-09-24-van-043-1790261208","location":{"latitude":52.368141,"longitude":4.90361},"speed_kmh":23.5,"heading_degrees":214.4,"battery_pct":33,"status":"EN_ROUTE","current_stop_index":10,"total_stops":17,"eta_next_stop_seconds":227,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Central Station Traffic","last_updated":"2026-09-24T15:40:06.738889635Z"}
+
+id:van-036-1790264408665
+event:van-update
+data:{"van_id":"van-036","route_id":"route-2026-09-24-van-036-1790263050","location":{"latitude":52.361697,"longitude":4.883207},"speed_kmh":27.7,"heading_degrees":271.4,"battery_pct":81,"status":"EN_ROUTE","current_stop_index":7,"total_stops":14,"eta_next_stop_seconds":307,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Vondelpark Construction","last_updated":"2026-09-24T15:40:08.665249034Z"}
+
+id:van-037-1790264409559
+event:van-update
+data:{"van_id":"van-037","route_id":"route-2026-09-24-van-037-1790262236","location":{"latitude":52.35231,"longitude":4.935358},"speed_kmh":21.7,"heading_degrees":35.7,"battery_pct":57,"status":"EN_ROUTE","current_stop_index":14,"total_stops":17,"eta_next_stop_seconds":164,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:40:09.559944856Z"}
+
+event:heartbeat
+:keepalive
+
+id:van-040-1790264414155
+event:van-update
+data:{"van_id":"van-040","route_id":"route-2026-09-24-van-040-1790260682","location":{"latitude":52.367861,"longitude":4.902857},"speed_kmh":21.6,"heading_degrees":215.6,"battery_pct":20,"status":"EN_ROUTE","current_stop_index":16,"total_stops":22,"eta_next_stop_seconds":152,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Central Station Traffic","last_updated":"2026-09-24T15:40:14.155074792Z"}
+
+id:van-048-1790264414160
+event:van-update
+data:{"van_id":"van-048","route_id":"route-2026-09-24-van-048-1790261375","location":{"latitude":52.349908,"longitude":4.916576},"speed_kmh":23.9,"heading_degrees":137.5,"battery_pct":45,"status":"EN_ROUTE","current_stop_index":10,"total_stops":21,"eta_next_stop_seconds":151,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:40:14.160070382Z"}
+
+id:van-035-1790264414738
+event:van-update
+data:{"van_id":"van-035","route_id":"route-2026-09-24-van-035-1790261108","location":{"latitude":52.372523,"longitude":4.908116},"speed_kmh":21.8,"heading_degrees":130.0,"battery_pct":46,"status":"EN_ROUTE","current_stop_index":15,"total_stops":18,"eta_next_stop_seconds":236,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Central Station Traffic","last_updated":"2026-09-24T15:40:14.738344803Z"}
+
+id:van-046-1790264416570
+event:van-update
+data:{"van_id":"van-046","route_id":"route-2026-09-24-van-046-1790261077","location":{"latitude":52.359409,"longitude":4.925438},"speed_kmh":0.0,"heading_degrees":67.4,"battery_pct":46,"status":"DELIVERING","current_stop_index":16,"total_stops":17,"eta_next_stop_seconds":281,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:40:16.570957495Z"}
+
+id:van-034-1790264418164
+event:van-update
+data:{"van_id":"van-034","route_id":"route-2026-09-24-van-034-1790261084","location":{"latitude":52.353517,"longitude":4.912714},"speed_kmh":22.4,"heading_degrees":343.5,"battery_pct":53,"status":"EN_ROUTE","current_stop_index":11,"total_stops":16,"eta_next_stop_seconds":212,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:40:18.164779502Z"}
+
+id:van-016-1790264418569
+event:van-update
+data:{"van_id":"van-016","route_id":"route-2026-09-24-van-016-1790262512","location":{"latitude":52.352015,"longitude":4.937031},"speed_kmh":0.0,"heading_degrees":226.7,"battery_pct":75,"status":"DELIVERING","current_stop_index":10,"total_stops":21,"eta_next_stop_seconds":359,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:40:18.569019961Z"}
+
+id:van-019-1790264419070
+event:van-update
+data:{"van_id":"van-019","route_id":"route-2026-09-24-van-019-1790262775","location":{"latitude":52.338688,"longitude":4.857101},"speed_kmh":25.0,"heading_degrees":265.0,"battery_pct":75,"status":"EN_ROUTE","current_stop_index":3,"total_stops":21,"eta_next_stop_seconds":130,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:40:19.070182758Z"}
+
+id:van-006-1790264420163
+event:van-update
+data:{"van_id":"van-006","route_id":"route-2026-09-24-van-006-1790261523","location":{"latitude":52.356987,"longitude":4.940447},"speed_kmh":22.0,"heading_degrees":214.4,"battery_pct":49,"status":"EN_ROUTE","current_stop_index":17,"total_stops":20,"eta_next_stop_seconds":143,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:40:20.163689271Z"}
+
+event:heartbeat
+:keepalive
+
+id:van-046-1790264425575
+event:van-update
+data:{"van_id":"van-046","route_id":"route-2026-09-24-van-046-1790261077","location":{"latitude":52.349013,"longitude":4.91785},"speed_kmh":20.2,"heading_degrees":144.6,"battery_pct":45,"status":"RETURNING","current_stop_index":17,"total_stops":17,"eta_next_stop_seconds":242,"sla_risk":"CRITICAL","confidence":"INTERPOLATED","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:40:25.575469621Z"}
+
+id:van-008-1790264427065
+event:van-update
+data:{"van_id":"van-008","route_id":"route-2026-09-24-van-008-1790261745","location":{"latitude":52.34034,"longitude":4.901799},"speed_kmh":27.0,"heading_degrees":94.7,"battery_pct":62,"status":"RETURNING","current_stop_index":16,"total_stops":16,"eta_next_stop_seconds":360,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"De Pijp School Zone","last_updated":"2026-09-24T15:40:27.065138223Z"}
+
+id:van-036-1790264428671
+event:van-update
+data:{"van_id":"van-036","route_id":"route-2026-09-24-van-036-1790263050","location":{"latitude":52.362893,"longitude":4.880244},"speed_kmh":25.5,"heading_degrees":329.6,"battery_pct":81,"status":"EN_ROUTE","current_stop_index":7,"total_stops":14,"eta_next_stop_seconds":319,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Vondelpark Construction","last_updated":"2026-09-24T15:40:28.671642501Z"}
+
+id:van-047-1790264429766
+event:van-update
+data:{"van_id":"van-047","route_id":"route-2026-09-24-van-047-1790262283","location":{"latitude":52.359509,"longitude":4.877587},"speed_kmh":27.7,"heading_degrees":336.2,"battery_pct":54,"status":"EN_ROUTE","current_stop_index":11,"total_stops":17,"eta_next_stop_seconds":224,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Vondelpark Construction","last_updated":"2026-09-24T15:40:29.766683336Z"}
+
+id:van-039-1790264430059
+event:van-update
+data:{"van_id":"van-039","route_id":"route-2026-09-24-van-039-1790262891","location":{"latitude":52.372608,"longitude":4.882568},"speed_kmh":27.8,"heading_degrees":247.2,"battery_pct":65,"status":"EN_ROUTE","current_stop_index":6,"total_stops":20,"eta_next_stop_seconds":163,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Jordaan Narrow Streets","last_updated":"2026-09-24T15:40:30.059301060Z"}
+
+id:van-004-1790264430574
+event:van-update
+data:{"van_id":"van-004","route_id":"route-2026-09-24-van-004-1790263521","location":{"latitude":52.373902,"longitude":4.882909},"speed_kmh":20.3,"heading_degrees":70.4,"battery_pct":86,"status":"EN_ROUTE","current_stop_index":3,"total_stops":19,"eta_next_stop_seconds":184,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Jordaan Narrow Streets","last_updated":"2026-09-24T15:40:30.574953967Z"}
+
+id:van-027-1790264430671
+event:van-update
+data:{"van_id":"van-027","route_id":"route-2026-09-24-van-027-1790263523","location":{"latitude":52.347888,"longitude":4.917994},"speed_kmh":29.7,"heading_degrees":114.4,"battery_pct":85,"status":"EN_ROUTE","current_stop_index":5,"total_stops":19,"eta_next_stop_seconds":135,"sla_risk":"CRITICAL","confidence":"INTERPOLATED","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:40:30.671482119Z"}
+
+id:van-030-1790264431165
+event:van-update
+data:{"van_id":"van-030","route_id":"route-2026-09-24-van-030-1790263505","location":{"latitude":52.365855,"longitude":4.886185},"speed_kmh":23.8,"heading_degrees":134.5,"battery_pct":88,"status":"EN_ROUTE","current_stop_index":4,"total_stops":15,"eta_next_stop_seconds":265,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Jordaan Narrow Streets","last_updated":"2026-09-24T15:40:31.165863299Z"}
+
+id:van-031-1790264431071
+event:van-update
+data:{"van_id":"van-031","route_id":"route-2026-09-24-van-031-1790262208","location":{"latitude":52.361841,"longitude":4.899079},"speed_kmh":22.6,"heading_degrees":166.7,"battery_pct":75,"status":"EN_ROUTE","current_stop_index":11,"total_stops":14,"eta_next_stop_seconds":369,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"De Pijp School Zone","last_updated":"2026-09-24T15:40:31.071748031Z"}
+
+id:van-021-1790264432058
+event:van-update
+data:{"van_id":"van-021","route_id":"route-2026-09-24-van-021-1790263962","location":{"latitude":52.364436,"longitude":4.86866},"speed_kmh":0.0,"heading_degrees":249.3,"battery_pct":89,"status":"DELIVERING","current_stop_index":1,"total_stops":22,"eta_next_stop_seconds":214,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Vondelpark Construction","last_updated":"2026-09-24T15:40:32.058109368Z"}
+
+id:van-031-1790264433570
+event:van-update
+data:{"van_id":"van-031","route_id":"route-2026-09-24-van-031-1790262208","location":{"latitude":52.349636,"longitude":4.884942},"speed_kmh":24.1,"heading_degrees":230.3,"battery_pct":74,"status":"EN_ROUTE","current_stop_index":12,"total_stops":14,"eta_next_stop_seconds":375,"sla_risk":"CRITICAL","confidence":"INTERPOLATED","in_geofence":true,"geofence_name":"Vondelpark Construction","last_updated":"2026-09-24T15:40:33.570338485Z"}
+
+id:van-011-1790264434256
+event:van-update
+data:{"van_id":"van-011","route_id":"route-2026-09-24-van-011-1790260904","location":{"latitude":52.382075,"longitude":4.910566},"speed_kmh":28.1,"heading_degrees":357.3,"battery_pct":38,"status":"EN_ROUTE","current_stop_index":13,"total_stops":19,"eta_next_stop_seconds":216,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Central Station Traffic","last_updated":"2026-09-24T15:40:34.256251736Z"}
+
+id:van-023-1790264435166
+event:van-update
+data:{"van_id":"van-023","route_id":"route-2026-09-24-van-023-1790263600","location":{"latitude":52.370897,"longitude":4.898369},"speed_kmh":0.0,"heading_degrees":210.7,"battery_pct":85,"status":"DELIVERING","current_stop_index":2,"total_stops":20,"eta_next_stop_seconds":172,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Central Station Traffic","last_updated":"2026-09-24T15:40:35.166229416Z"}
+
+id:van-003-1790264437154
+event:van-update
+data:{"van_id":"van-003","route_id":"route-2026-09-24-van-003-1790261111","location":{"latitude":52.349219,"longitude":4.917721},"speed_kmh":23.7,"heading_degrees":320.7,"battery_pct":52,"status":"EN_ROUTE","current_stop_index":15,"total_stops":21,"eta_next_stop_seconds":146,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:40:37.154148908Z"}
+
+id:van-025-1790264438066
+event:van-update
+data:{"van_id":"van-025","route_id":"route-2026-09-24-van-025-1790262877","location":{"latitude":52.389238,"longitude":4.919674},"speed_kmh":21.5,"heading_degrees":50.6,"battery_pct":68,"status":"EN_ROUTE","current_stop_index":7,"total_stops":17,"eta_next_stop_seconds":242,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:40:38.066846172Z"}
+
+id:van-029-1790264438085
+event:van-update
+data:{"van_id":"van-029","route_id":"route-2026-09-24-van-029-1790262921","location":{"latitude":52.386171,"longitude":4.922327},"speed_kmh":28.8,"heading_degrees":62.2,"battery_pct":78,"status":"EN_ROUTE","current_stop_index":10,"total_stops":20,"eta_next_stop_seconds":197,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:40:38.085499778Z"}
+
+id:van-014-1790264440145
+event:van-update
+data:{"van_id":"van-014","route_id":"route-2026-09-24-van-014-1790263444","location":{"latitude":52.353952,"longitude":4.937272},"speed_kmh":0.0,"heading_degrees":315.9,"battery_pct":81,"status":"DELIVERING","current_stop_index":4,"total_stops":15,"eta_next_stop_seconds":309,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:40:40.145880207Z"}
+
+event:heartbeat
+:keepalive
+
+id:van-049-1790264442082
+event:van-update
+data:{"van_id":"van-049","route_id":"route-2026-09-24-van-049-1790257803","location":{"latitude":52.367918,"longitude":4.90296},"speed_kmh":28.6,"heading_degrees":232.6,"battery_pct":5,"status":"EN_ROUTE","current_stop_index":16,"total_stops":18,"eta_next_stop_seconds":158,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Central Station Traffic","last_updated":"2026-09-24T15:40:42.082704266Z"}
+
+id:van-005-1790264442578
+event:van-update
+data:{"van_id":"van-005","route_id":"route-2026-09-24-van-005-1790260626","location":{"latitude":52.328645,"longitude":4.879703},"speed_kmh":0.0,"heading_degrees":0.0,"battery_pct":25,"status":"DELIVERING","current_stop_index":16,"total_stops":19,"eta_next_stop_seconds":197,"sla_risk":"CRITICAL","confidence":"INTERPOLATED","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:40:42.578549906Z"}
+
+id:van-037-1790264445582
+event:van-update
+data:{"van_id":"van-037","route_id":"route-2026-09-24-van-037-1790262236","location":{"latitude":52.352979,"longitude":4.934436},"speed_kmh":23.0,"heading_degrees":45.5,"battery_pct":57,"status":"EN_ROUTE","current_stop_index":14,"total_stops":17,"eta_next_stop_seconds":158,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:40:45.582981920Z"}
+
+id:van-004-1790264446143
+event:van-update
+data:{"van_id":"van-004","route_id":"route-2026-09-24-van-004-1790263521","location":{"latitude":52.393765,"longitude":4.925475},"speed_kmh":0.0,"heading_degrees":353.3,"battery_pct":84,"status":"DELIVERING","current_stop_index":3,"total_stops":19,"eta_next_stop_seconds":213,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:40:46.143829988Z"}
+
+id:van-026-1790264448640
+event:van-update
+data:{"van_id":"van-026","route_id":"route-2026-09-24-van-026-1790262561","location":{"latitude":52.374619,"longitude":4.880825},"speed_kmh":0.0,"heading_degrees":69.2,"battery_pct":72,"status":"DELIVERING","current_stop_index":8,"total_stops":22,"eta_next_stop_seconds":399,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Jordaan Narrow Streets","last_updated":"2026-09-24T15:40:48.640679821Z"}
+
+id:van-037-1790264450639
+event:van-update
+data:{"van_id":"van-037","route_id":"route-2026-09-24-van-037-1790262236","location":{"latitude":52.353202,"longitude":4.93424},"speed_kmh":0.0,"heading_degrees":315.8,"battery_pct":57,"status":"DELIVERING","current_stop_index":14,"total_stops":17,"eta_next_stop_seconds":186,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:40:50.639624018Z"}
+
+id:van-044-1790264451246
+event:van-update
+data:{"van_id":"van-044","route_id":"route-2026-09-24-van-044-1790264268","location":{"latitude":52.344451,"longitude":4.890799},"speed_kmh":25.8,"heading_degrees":4.1,"battery_pct":93,"status":"EN_ROUTE","current_stop_index":0,"total_stops":15,"eta_next_stop_seconds":200,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"De Pijp School Zone","last_updated":"2026-09-24T15:40:51.246280918Z"}
+
+id:van-018-1790264452481
+event:van-update
+data:{"van_id":"van-018","route_id":"route-2026-09-24-van-018-1790262913","location":{"latitude":52.361846,"longitude":4.871602},"speed_kmh":0.0,"heading_degrees":247.1,"battery_pct":72,"status":"DELIVERING","current_stop_index":6,"total_stops":19,"eta_next_stop_seconds":340,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Vondelpark Construction","last_updated":"2026-09-24T15:40:52.481861079Z"}
+
+event:heartbeat
+:keepalive
+
+id:van-018-1790264457481
+event:van-update
+data:{"van_id":"van-018","route_id":"route-2026-09-24-van-018-1790262913","location":{"latitude":52.367552,"longitude":4.904222},"speed_kmh":28.9,"heading_degrees":317.5,"battery_pct":70,"status":"EN_ROUTE","current_stop_index":7,"total_stops":19,"eta_next_stop_seconds":297,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Central Station Traffic","last_updated":"2026-09-24T15:40:57.481471778Z"}
+
+id:van-039-1790264458066
+event:van-update
+data:{"van_id":"van-039","route_id":"route-2026-09-24-van-039-1790262891","location":{"latitude":52.366245,"longitude":4.882404},"speed_kmh":25.3,"heading_degrees":156.8,"battery_pct":64,"status":"EN_ROUTE","current_stop_index":7,"total_stops":20,"eta_next_stop_seconds":177,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Vondelpark Construction","last_updated":"2026-09-24T15:40:58.066467645Z"}
+
+id:van-024-1790264458767
+event:van-update
+data:{"van_id":"van-024","route_id":"route-2026-09-24-van-024-1790261660","location":{"latitude":52.365174,"longitude":4.864305},"speed_kmh":22.2,"heading_degrees":68.2,"battery_pct":50,"status":"EN_ROUTE","current_stop_index":10,"total_stops":22,"eta_next_stop_seconds":130,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Vondelpark Construction","last_updated":"2026-09-24T15:40:58.767903739Z"}
+
+id:van-047-1790264461355
+event:van-update
+data:{"van_id":"van-047","route_id":"route-2026-09-24-van-047-1790262283","location":{"latitude":52.366113,"longitude":4.869696},"speed_kmh":0.0,"heading_degrees":337.6,"battery_pct":54,"status":"DELIVERING","current_stop_index":11,"total_stops":17,"eta_next_stop_seconds":288,"sla_risk":"CRITICAL","confidence":"INTERPOLATED","in_geofence":true,"geofence_name":"Vondelpark Construction","last_updated":"2026-09-24T15:41:01.355393117Z"}
+
+id:van-011-1790264463769
+event:van-update
+data:{"van_id":"van-011","route_id":"route-2026-09-24-van-011-1790260904","location":{"latitude":52.386912,"longitude":4.920171},"speed_kmh":0.0,"heading_degrees":100.6,"battery_pct":32,"status":"DELIVERING","current_stop_index":13,"total_stops":19,"eta_next_stop_seconds":247,"sla_risk":"CRITICAL","confidence":"INTERPOLATED","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:41:03.769049314Z"}
+
+id:van-039-1790264464066
+event:van-update
+data:{"van_id":"van-039","route_id":"route-2026-09-24-van-039-1790262891","location":{"latitude":52.359521,"longitude":4.89864},"speed_kmh":29.2,"heading_degrees":185.0,"battery_pct":64,"status":"EN_ROUTE","current_stop_index":7,"total_stops":20,"eta_next_stop_seconds":176,"sla_risk":"CRITICAL","confidence":"INTERPOLATED","in_geofence":true,"geofence_name":"De Pijp School Zone","last_updated":"2026-09-24T15:41:04.066461938Z"}
+
+id:van-038-1790264464666
+event:van-update
+data:{"van_id":"van-038","route_id":"route-2026-09-24-van-038-1790259427","location":{"latitude":52.337886,"longitude":4.939087},"speed_kmh":22.1,"heading_degrees":201.8,"battery_pct":5,"status":"EN_ROUTE","current_stop_index":13,"total_stops":17,"eta_next_stop_seconds":151,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:41:04.666592394Z"}
+
+id:van-036-1790264464760
+event:van-update
+data:{"van_id":"van-036","route_id":"route-2026-09-24-van-036-1790263050","location":{"latitude":52.365523,"longitude":4.87344},"speed_kmh":25.1,"heading_degrees":334.8,"battery_pct":81,"status":"EN_ROUTE","current_stop_index":7,"total_stops":14,"eta_next_stop_seconds":330,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Vondelpark Construction","last_updated":"2026-09-24T15:41:04.760571794Z"}
+
+id:van-032-1790264465674
+event:van-update
+data:{"van_id":"van-032","route_id":"route-2026-09-24-van-032-1790261904","location":{"latitude":52.352747,"longitude":4.932264},"speed_kmh":24.7,"heading_degrees":316.3,"battery_pct":57,"status":"EN_ROUTE","current_stop_index":14,"total_stops":18,"eta_next_stop_seconds":144,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:41:05.674673277Z"}
+
+id:van-026-1790264466663
+event:van-update
+data:{"van_id":"van-026","route_id":"route-2026-09-24-van-026-1790262561","location":{"latitude":52.360605,"longitude":4.876736},"speed_kmh":25.0,"heading_degrees":157.4,"battery_pct":69,"status":"EN_ROUTE","current_stop_index":9,"total_stops":22,"eta_next_stop_seconds":354,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Vondelpark Construction","last_updated":"2026-09-24T15:41:06.663422662Z"}
+
+id:van-015-1790264466868
+event:van-update
+data:{"van_id":"van-015","route_id":"route-2026-09-24-van-015-1790262375","location":{"latitude":52.355801,"longitude":4.84291},"speed_kmh":25.4,"heading_degrees":3.9,"battery_pct":64,"status":"EN_ROUTE","current_stop_index":11,"total_stops":18,"eta_next_stop_seconds":147,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:41:06.868034987Z"}
+
+id:van-006-1790264467256
+event:van-update
+data:{"van_id":"van-006","route_id":"route-2026-09-24-van-006-1790261523","location":{"latitude":52.350691,"longitude":4.915501},"speed_kmh":21.6,"heading_degrees":313.3,"battery_pct":46,"status":"EN_ROUTE","current_stop_index":17,"total_stops":20,"eta_next_stop_seconds":139,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:41:07.256404766Z"}
+
+id:van-012-1790264468772
+event:van-update
+data:{"van_id":"van-012","route_id":"route-2026-09-24-van-012-1790264378","location":{"latitude":52.337406,"longitude":4.942904},"speed_kmh":23.1,"heading_degrees":247.6,"battery_pct":97,"status":"EN_ROUTE","current_stop_index":0,"total_stops":22,"eta_next_stop_seconds":156,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:41:08.772748379Z"}
+
+event:heartbeat
+:keepalive
+
+id:van-011-1790264472270
+event:van-update
+data:{"van_id":"van-011","route_id":"route-2026-09-24-van-011-1790260904","location":{"latitude":52.386912,"longitude":4.920171},"speed_kmh":0.0,"heading_degrees":100.6,"battery_pct":32,"status":"DELIVERING","current_stop_index":13,"total_stops":19,"eta_next_stop_seconds":278,"sla_risk":"CRITICAL","confidence":"INTERPOLATED","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:41:12.270556374Z"}
+
+id:van-000-1790264472757
+event:van-update
+data:{"van_id":"van-000","route_id":"route-2026-09-24-van-000-1790261640","location":{"latitude":52.38933,"longitude":4.919973},"speed_kmh":26.1,"heading_degrees":314.7,"battery_pct":62,"status":"EN_ROUTE","current_stop_index":16,"total_stops":18,"eta_next_stop_seconds":182,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:41:12.757360822Z"}
+
+id:van-044-1790264473760
+event:van-update
+data:{"van_id":"van-044","route_id":"route-2026-09-24-van-044-1790264268","location":{"latitude":52.350861,"longitude":4.897351},"speed_kmh":0.0,"heading_degrees":77.1,"battery_pct":93,"status":"DELIVERING","current_stop_index":0,"total_stops":15,"eta_next_stop_seconds":240,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"De Pijp School Zone","last_updated":"2026-09-24T15:41:13.760354703Z"}
+
+id:van-031-1790264473667
+event:van-update
+data:{"van_id":"van-031","route_id":"route-2026-09-24-van-031-1790262208","location":{"latitude":52.348713,"longitude":4.88307},"speed_kmh":26.2,"heading_degrees":230.2,"battery_pct":74,"status":"EN_ROUTE","current_stop_index":12,"total_stops":14,"eta_next_stop_seconds":373,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Vondelpark Construction","last_updated":"2026-09-24T15:41:13.667895428Z"}
+
+id:van-036-1790264474763
+event:van-update
+data:{"van_id":"van-036","route_id":"route-2026-09-24-van-036-1790263050","location":{"latitude":52.36827,"longitude":4.869475},"speed_kmh":0.0,"heading_degrees":157.9,"battery_pct":81,"status":"DELIVERING","current_stop_index":7,"total_stops":14,"eta_next_stop_seconds":396,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Vondelpark Construction","last_updated":"2026-09-24T15:41:14.763024131Z"}
+
+id:van-038-1790264475170
+event:van-update
+data:{"van_id":"van-038","route_id":"route-2026-09-24-van-038-1790259427","location":{"latitude":52.305736,"longitude":4.923703},"speed_kmh":23.7,"heading_degrees":225.0,"battery_pct":5,"status":"EN_ROUTE","current_stop_index":13,"total_stops":17,"eta_next_stop_seconds":147,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:41:15.170409110Z"}
+
+id:van-048-1790264475764
+event:van-update
+data:{"van_id":"van-048","route_id":"route-2026-09-24-van-048-1790261375","location":{"latitude":52.308601,"longitude":4.92432},"speed_kmh":26.1,"heading_degrees":163.2,"battery_pct":45,"status":"EN_ROUTE","current_stop_index":10,"total_stops":21,"eta_next_stop_seconds":137,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:41:15.764430869Z"}
+
+id:van-044-1790264476267
+event:van-update
+data:{"van_id":"van-044","route_id":"route-2026-09-24-van-044-1790264268","location":{"latitude":52.349615,"longitude":4.90974},"speed_kmh":20.3,"heading_degrees":78.1,"battery_pct":93,"status":"EN_ROUTE","current_stop_index":1,"total_stops":15,"eta_next_stop_seconds":224,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:41:16.267831982Z"}
+
+id:van-028-1790264478749
+event:van-update
+data:{"van_id":"van-028","route_id":"route-2026-09-24-van-028-1790261563","location":{"latitude":52.368289,"longitude":4.933696},"speed_kmh":21.2,"heading_degrees":178.5,"battery_pct":62,"status":"EN_ROUTE","current_stop_index":14,"total_stops":16,"eta_next_stop_seconds":188,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:41:18.749522534Z"}
+
+id:van-024-1790264478848
+event:van-update
+data:{"van_id":"van-024","route_id":"route-2026-09-24-van-024-1790261660","location":{"latitude":52.373221,"longitude":4.885255},"speed_kmh":0.0,"heading_degrees":3.3,"battery_pct":49,"status":"DELIVERING","current_stop_index":10,"total_stops":22,"eta_next_stop_seconds":158,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Central Station Traffic","last_updated":"2026-09-24T15:41:18.848893523Z"}
+
+id:van-001-1790264481248
+event:van-update
+data:{"van_id":"van-001","route_id":"route-2026-09-24-van-001-1790261874","location":{"latitude":52.34344,"longitude":4.908667},"speed_kmh":0.0,"heading_degrees":347.4,"battery_pct":62,"status":"DELIVERING","current_stop_index":8,"total_stops":21,"eta_next_stop_seconds":150,"sla_risk":"CRITICAL","confidence":"INTERPOLATED","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:41:21.248013364Z"}
+
+id:van-012-1790264481275
+event:van-update
+data:{"van_id":"van-012","route_id":"route-2026-09-24-van-012-1790264378","location":{"latitude":52.33508,"longitude":4.936386},"speed_kmh":21.6,"heading_degrees":239.5,"battery_pct":97,"status":"EN_ROUTE","current_stop_index":0,"total_stops":22,"eta_next_stop_seconds":145,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:41:21.275238492Z"}
+
+id:van-024-1790264481349
+event:van-update
+data:{"van_id":"van-024","route_id":"route-2026-09-24-van-024-1790261660","location":{"latitude":52.374111,"longitude":4.88346},"speed_kmh":29.4,"heading_degrees":264.6,"battery_pct":49,"status":"EN_ROUTE","current_stop_index":11,"total_stops":22,"eta_next_stop_seconds":156,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Jordaan Narrow Streets","last_updated":"2026-09-24T15:41:21.349424122Z"}
+
+id:van-026-1790264483245
+event:van-update
+data:{"van_id":"van-026","route_id":"route-2026-09-24-van-026-1790262561","location":{"latitude":52.355313,"longitude":4.880485},"speed_kmh":20.8,"heading_degrees":155.8,"battery_pct":69,"status":"EN_ROUTE","current_stop_index":9,"total_stops":22,"eta_next_stop_seconds":341,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Vondelpark Construction","last_updated":"2026-09-24T15:41:23.245096182Z"}
+
+id:van-023-1790264483265
+event:van-update
+data:{"van_id":"van-023","route_id":"route-2026-09-24-van-023-1790263600","location":{"latitude":52.368529,"longitude":4.90376},"speed_kmh":26.0,"heading_degrees":161.3,"battery_pct":84,"status":"EN_ROUTE","current_stop_index":3,"total_stops":20,"eta_next_stop_seconds":178,"sla_risk":"CRITICAL","confidence":"INTERPOLATED","in_geofence":true,"geofence_name":"Central Station Traffic","last_updated":"2026-09-24T15:41:23.265993100Z"}
+
+id:van-031-1790264484244
+event:van-update
+data:{"van_id":"van-031","route_id":"route-2026-09-24-van-031-1790262208","location":{"latitude":52.340773,"longitude":4.870319},"speed_kmh":22.7,"heading_degrees":265.5,"battery_pct":71,"status":"EN_ROUTE","current_stop_index":12,"total_stops":14,"eta_next_stop_seconds":301,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:41:24.244868620Z"}
+
+id:van-000-1790264484753
+event:van-update
+data:{"van_id":"van-000","route_id":"route-2026-09-24-van-000-1790261640","location":{"latitude":52.349635,"longitude":4.916961},"speed_kmh":26.7,"heading_degrees":139.6,"battery_pct":57,"status":"EN_ROUTE","current_stop_index":16,"total_stops":18,"eta_next_stop_seconds":162,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:41:24.753345134Z"}
+
+event:heartbeat
+:keepalive
+
+id:van-035-1790264485274
+event:van-update
+data:{"van_id":"van-035","route_id":"route-2026-09-24-van-035-1790261108","location":{"latitude":52.356236,"longitude":4.910846},"speed_kmh":21.5,"heading_degrees":159.9,"battery_pct":43,"status":"EN_ROUTE","current_stop_index":16,"total_stops":18,"eta_next_stop_seconds":207,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:41:25.274338664Z"}
+
+id:van-025-1790264485658
+event:van-update
+data:{"van_id":"van-025","route_id":"route-2026-09-24-van-025-1790262877","location":{"latitude":52.406474,"longitude":4.938263},"speed_kmh":20.3,"heading_degrees":81.5,"battery_pct":67,"status":"EN_ROUTE","current_stop_index":8,"total_stops":17,"eta_next_stop_seconds":187,"sla_risk":"CRITICAL","confidence":"INTERPOLATED","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:41:25.658668291Z"}
+
+id:van-041-1790264488776
+event:van-update
+data:{"van_id":"van-041","route_id":"route-2026-09-24-van-041-1790263559","location":{"latitude":52.359773,"longitude":4.898772},"speed_kmh":25.6,"heading_degrees":203.6,"battery_pct":82,"status":"EN_ROUTE","current_stop_index":4,"total_stops":14,"eta_next_stop_seconds":257,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"De Pijp School Zone","last_updated":"2026-09-24T15:41:28.776703211Z"}
+
+id:van-039-1790264490142
+event:van-update
+data:{"van_id":"van-039","route_id":"route-2026-09-24-van-039-1790262891","location":{"latitude":52.363604,"longitude":4.906632},"speed_kmh":20.8,"heading_degrees":338.6,"battery_pct":64,"status":"EN_ROUTE","current_stop_index":7,"total_stops":20,"eta_next_stop_seconds":183,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"De Pijp School Zone","last_updated":"2026-09-24T15:41:30.142875912Z"}
+
+id:van-035-1790264490340
+event:van-update
+data:{"van_id":"van-035","route_id":"route-2026-09-24-van-035-1790261108","location":{"latitude":52.343985,"longitude":4.906392},"speed_kmh":0.0,"heading_degrees":254.7,"battery_pct":42,"status":"DELIVERING","current_stop_index":16,"total_stops":18,"eta_next_stop_seconds":246,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"De Pijp School Zone","last_updated":"2026-09-24T15:41:30.340028555Z"}
+
+id:van-048-1790264492280
+event:van-update
+data:{"van_id":"van-048","route_id":"route-2026-09-24-van-048-1790261375","location":{"latitude":52.301773,"longitude":4.877734},"speed_kmh":25.6,"heading_degrees":293.0,"battery_pct":45,"status":"EN_ROUTE","current_stop_index":10,"total_stops":21,"eta_next_stop_seconds":127,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:41:32.280873996Z"}
+
+id:van-040-1790264496275
+event:van-update
+data:{"van_id":"van-040","route_id":"route-2026-09-24-van-040-1790260682","location":{"latitude":52.368676,"longitude":4.896189},"speed_kmh":0.0,"heading_degrees":211.1,"battery_pct":19,"status":"DELIVERING","current_stop_index":16,"total_stops":22,"eta_next_stop_seconds":183,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":true,"geofence_name":"Central Station Traffic","last_updated":"2026-09-24T15:41:36.275065052Z"}
+
+id:van-014-1790264497762
+event:van-update
+data:{"van_id":"van-014","route_id":"route-2026-09-24-van-014-1790263444","location":{"latitude":52.353829,"longitude":4.93068},"speed_kmh":23.3,"heading_degrees":228.0,"battery_pct":81,"status":"EN_ROUTE","current_stop_index":5,"total_stops":15,"eta_next_stop_seconds":257,"sla_risk":"CRITICAL","confidence":"INTERPOLATED","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:41:37.762610181Z"}
+
+id:van-010-1790264499151
+event:van-update
+data:{"van_id":"van-010","route_id":"route-2026-09-24-van-010-1790262799","location":{"latitude":52.297378,"longitude":4.847123},"speed_kmh":0.0,"heading_degrees":333.5,"battery_pct":69,"status":"DELIVERING","current_stop_index":6,"total_stops":19,"eta_next_stop_seconds":183,"sla_risk":"CRITICAL","confidence":"REAL_TIME","in_geofence":false,"geofence_name":null,"last_updated":"2026-09-24T15:41:39.151123Z"}
+

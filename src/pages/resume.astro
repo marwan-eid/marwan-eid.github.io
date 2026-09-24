@@ -1,0 +1,232 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { profile, experience, education, skills } from '../data/profile';
+
+const projects = [
+  {
+    name: 'MilkRun: Real-Time Fleet Tracking',
+    stack: 'Java, Kafka, PostgreSQL/PostGIS, React',
+    when: 'Aug 2026',
+    href: '/work/milkrun',
+    bullets: [
+      'Architected a reactive telemetry pipeline with Spring WebFlux and reactor-kafka, streaming GPS events from 50 simulated delivery vans through Kafka to a React/Leaflet dashboard over Server-Sent Events.',
+      'Mitigated duplicate payloads from simulated retry storms with an FNV-1a Bloom filter, and reconciled out-of-order events with a per-van priority-queue reorder buffer, routing expired entries to a dead-letter queue for audit.',
+      'Computed SLA-risk ETAs from Haversine distance and PostGIS geofence speed factors behind a Resilience4j circuit breaker, and federated live metrics with PostGIS zones via Apache Calcite for delay analytics.',
+      'Instrumented with Micrometer, Prometheus and Grafana; 38 automated tests run in GitHub Actions CI.',
+    ],
+  },
+  {
+    name: 'High-Performance Chat System',
+    stack: 'Ruby on Rails, Go, Redis, MySQL, Elasticsearch',
+    when: 'Nov 2025',
+    href: '/work/chat-system',
+    bullets: [
+      'Split a chat API into a Go write service (race-free sequence numbers via Redis atomic counters, async persistence through Sidekiq) and a Rails layer for reads and business logic, with Elasticsearch for full-text search.',
+    ],
+  },
+];
+---
+
+<Base title="Resume" description="Resume of Marwan Eid, software engineer: experience, projects, education and skills." og="resume">
+  <div class="container-page pt-10 sm:pt-14">
+    <div class="no-print mb-8 flex flex-wrap items-center justify-between gap-4">
+      <div>
+        <p class="eyebrow">Resume</p>
+        <p class="mt-1 text-sm text-muted">The same content as my PDF resume, always up to date.</p>
+      </div>
+      <div class="flex gap-2">
+        <a href="/marwan-eid-resume.pdf" class="btn btn-primary" download>
+          <Icon name="download" size={16} /> Download PDF
+        </a>
+      </div>
+    </div>
+
+    <article class="resume card mx-auto max-w-[52rem] p-6 sm:p-12">
+      <header class="border-b border-line pb-6">
+        <h1 class="text-3xl font-semibold tracking-tight">{profile.name}</h1>
+        <p class="mt-1 text-muted">Software Engineer · Backend & Full-Stack</p>
+        <p class="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted">
+          <span>{profile.location}</span>
+          <a class="link" href={`mailto:${profile.email}`}>{profile.email}</a>
+          <a class="link" href={profile.links.linkedin}>linkedin.com/in/marwan-eid</a>
+          <a class="link" href={profile.links.github}>github.com/marwan-eid</a>
+          <a class="link" href={profile.site}>marwan-eid.github.io</a>
+        </p>
+      </header>
+
+      <section class="mt-7">
+        <h2 class="resume-h">Work experience</h2>
+        {
+          experience.map((r) => (
+            <div class="mt-5 break-inside-avoid">
+              <div class="flex flex-wrap items-baseline justify-between gap-x-4">
+                <h3 class="font-semibold">
+                  {r.title} <span class="font-normal text-muted">· {r.company}</span>
+                </h3>
+                <p class="font-mono text-[0.78rem] text-faint">
+                  {r.start} – {r.end}
+                </p>
+              </div>
+              <ul class="resume-list">
+                {r.bullets.map((b) => (
+                  <li>{b}</li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </section>
+
+      <section class="mt-8">
+        <h2 class="resume-h">Projects</h2>
+        {
+          projects.map((p) => (
+            <div class="mt-5 break-inside-avoid">
+              <div class="flex flex-wrap items-baseline justify-between gap-x-4">
+                <h3 class="font-semibold">
+                  <a class="link" href={p.href}>
+                    {p.name}
+                  </a>{' '}
+                  <span class="text-sm font-normal text-muted">({p.stack})</span>
+                </h3>
+                <p class="font-mono text-[0.78rem] text-faint">{p.when}</p>
+              </div>
+              <ul class="resume-list">
+                {p.bullets.map((b) => (
+                  <li>{b}</li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </section>
+
+      <section class="mt-8 break-inside-avoid">
+        <h2 class="resume-h">Education</h2>
+        <div class="mt-5">
+          <div class="flex flex-wrap items-baseline justify-between gap-x-4">
+            <h3 class="font-semibold">
+              {education.degree} <span class="font-normal text-muted">· {education.school}</span>
+            </h3>
+            <p class="font-mono text-[0.78rem] text-faint">
+              {education.start} – {education.end}
+            </p>
+          </div>
+          <ul class="resume-list">
+            <li>{education.notes.join(' · ')}.</li>
+            <li>Recipient of the Atef &amp; Fofa Eltoukhy Family Endowed Scholarship ($125K), awarded to 1 student every 5 years.</li>
+            <li>Represented Egypt at the 2017 Mediterranean Youth Mathematical Championship (bronze medal), qualifying through the Egyptian Mathematical Olympiad.</li>
+            <li>
+              Graduation project: <a class="link" href={profile.links.paper}>The Right Losses for the Right Gains (arXiv:2312.10854)</a>, a text-to-image
+              architecture that outperformed state-of-the-art baselines, improving FID by 44%.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="mt-8 break-inside-avoid">
+        <h2 class="resume-h">Skills</h2>
+        <dl class="mt-4 space-y-1.5 text-[0.92rem]">
+          {
+            skills.map((g) => (
+              <div class="grid gap-x-4 sm:grid-cols-[11rem_1fr]">
+                <dt class="font-medium">{g.group}</dt>
+                <dd class="text-muted">{g.items.join(', ')}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </section>
+    </article>
+  </div>
+</Base>
+
+<style>
+  .resume-h {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .resume-list {
+    margin-top: 0.6rem;
+    padding-left: 1.1rem;
+    list-style: disc;
+    color: var(--muted);
+    font-size: 0.93rem;
+    line-height: 1.6;
+  }
+  .resume-list li + li {
+    margin-top: 0.35rem;
+  }
+  .resume-list li::marker {
+    color: var(--faint);
+  }
+
+  @media print {
+    @page {
+      size: A4;
+      margin: 9mm 12mm;
+    }
+    :global(html),
+    :global(body) {
+      background: #fff !important;
+    }
+    :global(main) {
+      padding: 0;
+    }
+    .resume {
+      border: 0 !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+      max-width: none !important;
+      font-size: 9pt;
+      line-height: 1.35;
+    }
+    .resume :global(header) {
+      padding-bottom: 0.5rem !important;
+    }
+    .resume :global(header p) {
+      margin-top: 0.15rem !important;
+      font-size: 8.8pt;
+    }
+    .resume :global(h3) {
+      font-size: 9.6pt;
+    }
+    .resume :global(.mt-5) {
+      margin-top: 0.55rem !important;
+    }
+    .resume :global(dl) {
+      margin-top: 0.4rem !important;
+      font-size: 8.6pt;
+    }
+    .resume :global(dl > div + div) {
+      margin-top: 0.1rem !important;
+    }
+    .resume :global(dl .sm:grid-cols-[11rem_1fr]) {
+      grid-template-columns: 9.5rem 1fr;
+    }
+    .resume h1 {
+      font-size: 17pt;
+    }
+    .resume-list {
+      margin-top: 0.25rem;
+      font-size: 8.7pt;
+      line-height: 1.38;
+    }
+    .resume-list li + li {
+      margin-top: 0.1rem;
+    }
+    .resume :global(section) {
+      margin-top: 0.7rem !important;
+    }
+    .resume :global(a) {
+      text-decoration: none !important;
+    }
+    .break-inside-avoid {
+      break-inside: avoid;
+    }
+  }
+</style>

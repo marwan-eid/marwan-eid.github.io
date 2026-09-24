@@ -1,0 +1,77 @@
+---
+title: 'Real-time vehicle communication platform'
+kicker: 'Valeo · 2023 – present'
+summary: 'The cloud foundation for live, multi-party streaming sessions between vehicles and the people who work with them. Event-driven, MQTT-based, on AWS EKS and Lambda, with CI/CD and self-healing operations built in.'
+order: 2
+period: 'Jul 2023 – present'
+role: 'Designed the platform; led 2 engineers through design and delivery'
+stack: ['Java', 'Spring Boot', 'Go', 'MQTT', 'AWS EKS', 'AWS Lambda', 'Amazon RDS', 'Kubernetes', 'Helm', 'Docker', 'GitHub Actions', 'CloudWatch']
+metrics:
+  - { value: '10', label: 'Spring Boot services on EKS' }
+  - { value: '25', label: 'Lambda functions' }
+  - { value: '<10 min', label: 'deploys, down from hours' }
+featured: true
+---
+
+import Diagram from '../../components/Diagram.tsx';
+import { vehiclePlatform } from '../../data/diagrams';
+
+## The problem
+
+Modern vehicles need to talk to people in real time: a session where a vehicle streams live to one or more remote participants at once. The platform behind that has to do three things well:
+
+- **Put every session somewhere sensible.** Sessions start and end constantly, and the load on streaming servers shifts with them.
+- **Get every participant to the right place.** When a vehicle or a participant joins, it must land on the exact server hosting its session, even when many devices join at once.
+- **Survive mobile networks.** Vehicles drop off and reconnect. The protocol and the architecture have to expect that.
+
+I designed this platform at Valeo and led a team of two engineers through its design and delivery. It runs as **10 Spring Boot services on AWS EKS and 25 AWS Lambda functions**.
+
+## Architecture
+
+This is a simplified view with the moving parts that matter. Click a component, or play the walkthrough.
+
+<Diagram client:visible {...vehiclePlatform} />
+
+## Key decisions
+
+### Event-driven, over MQTT
+
+Vehicles speak **MQTT**: a lightweight publish/subscribe protocol designed for constrained devices and unreliable links. Inside the platform, session requests, joins and lifecycle changes are events. Services react to them instead of calling each other synchronously, which keeps them decoupled and lets each one scale on its own.
+
+### Least-loaded placement
+
+Each new session goes to the **streaming server with the most headroom right now**, not the next one in a rotation. Sessions have very different lifetimes, so round-robin gradually piles load onto whichever servers happen to hold the long-lived ones. Placing by current load keeps the pool balanced as sessions come and go.
+
+### A registry as the single source of truth
+
+Once a session is placed, the mapping is written to a **session registry backed by Amazon RDS**. Every device join is resolved against it. A relational store gives consistent answers when several participants join the same session at the same moment, and it makes the system's state easy to inspect when something goes wrong.
+
+### EKS for connections, Lambda for bursts
+
+Long-lived streaming connections and stateful services run on **EKS**, where they can hold connections and autoscale. Short, bursty, event-triggered work runs on **Lambda**. The one catch with Lambda is cold starts. Fixing that became its own project: [from 10 s to 1 s](/work/cold-starts).
+
+## Shipping it: CI/CD
+
+Early on, standing up and deploying an environment took hours of manual steps. I automated the pipeline end to end with **GitHub Actions, Docker and Helm** on Kubernetes:
+
+- Every service builds into a container image and deploys through a versioned Helm release.
+- Rollouts are **zero-downtime**, and a failed rollout **rolls back automatically**.
+- Deployment time went from **hours to under 10 minutes**.
+
+
+## Keeping it healthy: closed-loop AI operations
+
+With many services and functions, problems surface first as patterns in logs. I built an **event-driven, closed-loop AI system** around that:
+
+1. It watches **CloudWatch logs** and detects operational anomalies.
+2. For each one, it **generates candidate fixes**.
+3. It **verifies each fix in sandboxed local and demo environments**.
+4. Only verified fixes are **routed to an engineer for review**.
+
+The key design choice is the last step. The system never ships a change on its own. It turns "something looks wrong in the logs" into "here's a tested fix, please review", and engineers keep the final say.
+
+## What I took away
+
+- **Placement is a product decision, not just an algorithm.** How sessions are spread decides what users experience when load spikes.
+- **Put the source of truth somewhere boring.** A relational registry made concurrent joins predictable and debugging straightforward.
+- **Automate the path to production early.** The CI/CD work paid for itself on every change after it.

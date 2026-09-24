@@ -1,0 +1,161 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { profile, skills } from '../data/profile';
+import portrait from '../assets/portrait.jpg';
+
+const timeline = [
+  { when: '2023 – now', what: 'Software Engineer', where: 'Valeo', note: 'Real-time vehicle communication platform, CI/CD, AI operations, Lambda performance.' },
+  { when: '2022 – 2023', what: 'Junior Software Engineer', where: 'Valeo', note: 'Migrated a 75k+ LOC desktop app to the web; real-time diagnostics in C#.' },
+  { when: '2021 – 2022', what: 'Graduation project', where: 'AUC', note: 'Text-to-image architecture, published on arXiv.' },
+  { when: '2021 – 2022', what: 'Software Engineering Intern', where: 'Rentola', note: 'Python/Scrapy crawlers with Selenium integration, shipped to production.' },
+  { when: '2020', what: 'Research Assistant', where: 'AUC', note: 'Steering-angle prediction with spatio-temporal attention for end-to-end self-driving.' },
+  { when: '2018 – 2020', what: 'Software team', where: 'MATE ROV competition', note: 'OpenCV object detection and a Qt/ROS control GUI for an underwater robot.' },
+  { when: '2017 – 2022', what: 'B.Sc. Computer Engineering', where: 'The American University in Cairo', note: 'Minors in Mathematics and Economics. Cum Laude.' },
+  { when: '2017', what: 'Bronze medal', where: 'Mediterranean Youth Mathematical Championship, Rome', note: 'Represented Egypt after qualifying through the Egyptian Mathematical Olympiad.' },
+];
+
+const principles = [
+  {
+    title: 'Measure what users feel',
+    text: 'Averages hid a 10-second first request for a long time. The slowest path users hit deserves its own metric.',
+    href: '/work/cold-starts',
+    link: 'Cold starts, 10 s → 1 s',
+  },
+  {
+    title: 'Incremental beats heroic',
+    text: 'Small, reversible steps moved 75k lines of desktop code to the web without a single cut-over day.',
+    href: '/work/legacy-migration',
+    link: 'The migration',
+  },
+  {
+    title: 'Make failure visible',
+    text: 'Late events go to a dead-letter queue, not /dev/null. Anything with a capacity needs a metric.',
+    href: '/work/milkrun',
+    link: 'MilkRun',
+  },
+];
+---
+
+<Base title="About" description="Software engineer at Valeo. Computer Engineering at AUC, competition mathematician, and builder of real-time systems." og="about">
+  <section class="container-page grid gap-12 pt-14 sm:pt-20 lg:grid-cols-[1fr_22rem] lg:gap-16">
+    <div>
+      <p class="eyebrow">About</p>
+      <h1 class="mt-3 text-4xl font-semibold tracking-[-0.03em] text-balance sm:text-5xl">
+        Hi, I'm Marwan. I like systems that <span class="serif-accent text-accent">meet the real world.</span>
+      </h1>
+      <div class="prose-case mt-8 max-w-[42rem]">
+        <p>
+          I'm a software engineer at <strong>Valeo</strong> in Egypt. I design the cloud platform behind real-time vehicle communication:
+          event-driven services on AWS EKS and Lambda that put live sessions on the right servers and get vehicles and people connected to them.
+          Along the way I've led engineers, cut API latency tenfold, and turned hours-long deployments into minutes.
+        </p>
+        <p>
+          Before software, there was math. In 2017 I qualified through the Egyptian Mathematical Olympiad and represented Egypt at the
+          Mediterranean Youth Mathematical Championship in Rome, winning a bronze medal. I studied Computer Engineering at{" "}
+          <strong>The American University in Cairo</strong> on the Atef &amp; Fofa Eltoukhy Family Endowed Scholarship, awarded to one student every five
+          years, with minors in Mathematics and Economics, and graduated Cum Laude.
+        </p>
+        <p>
+          At university I worked on computer vision for an underwater robot, steering-angle prediction for self-driving cars, and production web
+          crawlers as an intern. My graduation project became a <a href={profile.links.paper}>paper on text-to-image generation</a> that improved FID by
+          44% over state-of-the-art baselines.
+        </p>
+        <p>
+          Outside my day job I build things like <a href="/work/milkrun">MilkRun</a> to go deep on ideas I care about: reactive streams, probabilistic
+          data structures, and spatial queries. I'm also open to <a href="/hire">freelance work</a>.
+        </p>
+      </div>
+    </div>
+
+    <aside class="lg:pt-10">
+      <div class="card overflow-hidden p-2">
+        <Image
+          src={portrait}
+          alt="Portrait of Marwan Eid, smiling, outdoors"
+          widths={[352, 560, 704]}
+          sizes="(min-width: 1024px) 22rem, 100vw"
+          class="aspect-[4/5] w-full rounded-[0.6rem] object-cover"
+          loading="eager"
+        />
+      </div>
+      <dl class="mt-5 space-y-3 text-sm">
+        <div class="flex items-center justify-between gap-4 border-b border-line pb-3">
+          <dt class="text-faint">Based in</dt>
+          <dd class="flex items-center gap-1.5"><Icon name="map-pin" size={14} class="text-faint" /> {profile.location}</dd>
+        </div>
+        <div class="flex items-center justify-between gap-4 border-b border-line pb-3">
+          <dt class="text-faint">Currently</dt>
+          <dd>Software Engineer, Valeo</dd>
+        </div>
+        <div class="flex items-center justify-between gap-4 border-b border-line pb-3">
+          <dt class="text-faint">Email</dt>
+          <dd><a class="link" href={`mailto:${profile.email}`}>{profile.email}</a></dd>
+        </div>
+        <div class="flex items-center justify-between gap-4">
+          <dt class="text-faint">Elsewhere</dt>
+          <dd class="flex gap-3">
+            <a class="link" href={profile.links.github}>GitHub</a>
+            <a class="link" href={profile.links.linkedin}>LinkedIn</a>
+          </dd>
+        </div>
+      </dl>
+    </aside>
+  </section>
+
+  <section class="container-page pt-20">
+    <p class="eyebrow">How I work</p>
+    <div class="mt-5 grid gap-4 md:grid-cols-3">
+      {
+        principles.map((p) => (
+          <div class="card flex flex-col p-5 sm:p-6">
+            <h2 class="font-semibold tracking-tight">{p.title}</h2>
+            <p class="mt-2 text-sm leading-relaxed text-muted">{p.text}</p>
+            <a href={p.href} class="group mt-auto inline-flex items-center gap-1.5 pt-4 text-sm text-fg">
+              {p.link}
+              <Icon name="arrow-right" size={14} class="text-faint transition-transform group-hover:translate-x-0.5 group-hover:text-accent" />
+            </a>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="container-page grid gap-12 pt-20 lg:grid-cols-[1fr_1fr]">
+    <div>
+      <p class="eyebrow">Timeline</p>
+      <ol class="mt-6 border-l border-line">
+        {
+          timeline.map((t) => (
+            <li class="relative pb-7 pl-6 last:pb-0">
+              <span class="absolute top-1.5 -left-[4.5px] size-2 rounded-full border border-line-strong bg-bg" aria-hidden="true" />
+              <p class="font-mono text-[0.72rem] text-faint">{t.when}</p>
+              <p class="mt-1 font-medium">
+                {t.what} <span class="font-normal text-muted">· {t.where}</span>
+              </p>
+              <p class="mt-1 text-sm leading-relaxed text-muted">{t.note}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+    <div>
+      <p class="eyebrow">Toolbox</p>
+      <div class="mt-6 space-y-6">
+        {
+          skills.map((g) => (
+            <div>
+              <h3 class="text-sm font-medium">{g.group}</h3>
+              <ul class="mt-2.5 flex flex-wrap gap-1.5">
+                {g.items.map((s) => (
+                  <li class="chip">{s}</li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Base>

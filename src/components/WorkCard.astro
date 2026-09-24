@@ -1,0 +1,50 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Icon from './Icon.astro';
+
+interface Props {
+  entry: CollectionEntry<'work'>;
+  size?: 'lg' | 'md';
+  live?: boolean;
+}
+
+const { entry, size = 'md', live = false } = Astro.props;
+const { title, kicker, summary, metrics, stack } = entry.data;
+---
+
+<a
+  href={`/work/${entry.id}`}
+  class:list={[
+    'group card relative flex flex-col overflow-hidden p-5 transition-[border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-line-strong sm:p-6',
+    size === 'lg' && 'md:col-span-2',
+  ]}
+>
+  <div class="flex items-center justify-between gap-3">
+    <span class="eyebrow flex items-center gap-2">
+      {live && <span class="live-dot" aria-hidden="true" />}
+      {kicker}
+    </span>
+    <Icon name="arrow-up-right" size={16} class="text-faint transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent" />
+  </div>
+  <h3 class:list={['mt-4 font-semibold tracking-tight text-fg', size === 'lg' ? 'text-2xl sm:text-[1.75rem] sm:leading-tight' : 'text-xl']}>
+    {title}
+  </h3>
+  <p class:list={['mt-2.5 text-[0.95rem] leading-relaxed text-muted', size === 'lg' && 'max-w-2xl']}>{summary}</p>
+
+  <div class="mt-auto pt-6">
+    <dl class="flex flex-wrap gap-x-7 gap-y-3">
+      {
+        metrics.map((m) => (
+          <div>
+            <dt class="sr-only">{m.label}</dt>
+            <dd class="font-mono text-[1.05rem] font-medium tracking-tight text-fg">{m.value}</dd>
+            <dd class="text-[0.75rem] text-faint">{m.label}</dd>
+          </div>
+        ))
+      }
+    </dl>
+    <ul class="mt-5 flex flex-wrap gap-1.5" aria-label="Tech stack">
+      {stack.slice(0, size === 'lg' ? 8 : 5).map((s) => <li class="chip">{s}</li>)}
+    </ul>
+  </div>
+</a>
