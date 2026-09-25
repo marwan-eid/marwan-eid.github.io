@@ -7,7 +7,8 @@ import { chromium } from 'playwright';
 const base = process.argv[2] ?? 'http://localhost:3000';
 const out = new URL('../public/marwan-eid-resume.pdf', import.meta.url);
 
-const browser = await chromium.launch();
+// Without this, Linux Chromium rounds glyph widths and the resume spills onto a second page.
+const browser = await chromium.launch({ args: ['--font-render-hinting=none'] });
 const page = await browser.newPage({ colorScheme: 'light' });
 await page.goto(`${base}/resume`, { waitUntil: 'networkidle' });
 await page.emulateMedia({ media: 'print', colorScheme: 'light' });

@@ -22,7 +22,7 @@ export const milkrunPipeline: Spec = {
       y: 60,
       tone: 'external',
       detail:
-        'Drives 50 vans along generated Amsterdam delivery routes and emits a GPS ping every 500 ms per van. Chaos modules duplicate, reorder and drop events the way a flaky cellular network would.',
+        'Drives 50 vans along real Amsterdam street routes and emits a GPS ping every 500 ms per van, plus delivery events and each route plan. A simulated cellular link adds jitter, retries and dead zones whose buffered pings are uploaded late.',
     },
     {
       id: 'kafka',
@@ -36,13 +36,13 @@ export const milkrunPipeline: Spec = {
     },
     {
       id: 'dedup',
-      label: 'Bloom dedup',
-      sub: 'per-van bitset',
+      label: 'Dedup',
+      sub: 'sliding window',
       x: 385,
       y: 60,
       tone: 'accent',
       detail:
-        'Cellular retries resend the same (van, sequence number) pair. A per-van Bloom filter using FNV-1a double hashing checks each key in constant time and memory, and drops the retry before it reaches the rest of the pipeline.',
+        'Cellular retries resend the same (van, sequence number) pair. A per-van sliding window (the IPsec anti-replay bitmap) recognises the retry exactly, in constant time and 512 bytes per van, and drops it before it reaches the rest of the pipeline. A Bloom filter is the alternative implementation.',
     },
     {
       id: 'reorder',
@@ -57,21 +57,21 @@ export const milkrunPipeline: Spec = {
     {
       id: 'eta',
       label: 'ETA engine',
-      sub: 'Haversine + geofences',
+      sub: 'route + delay zones',
       x: 755,
       y: 60,
       detail:
-        'Computes distance to the next stop with the Haversine formula, slows it by PostGIS geofence speed factors (construction, school zones, traffic) and classifies SLA risk. Wrapped in a Resilience4j circuit breaker with a linear-extrapolation fallback.',
+        "Places the ping on the van's planned route, walks the remaining road to the next stop at the van's learned speed, slowed by PostGIS delay zones, and compares the predicted arrival with the delivery slot. Wrapped in a Resilience4j circuit breaker with a straight-line fallback.",
     },
     {
       id: 'dlq',
-      label: 'Dead-letter queue',
+      label: 'Dead-letter log',
       sub: 'late events → audit',
       x: 570,
       y: 190,
       tone: 'muted',
       detail:
-        'Events older than the last one already released are too late to reorder. Rather than silently dropping them, they are persisted for audit.',
+        "Events older than the last one already released are too late to reorder. Rather than silently dropping them, they are logged for audit and written into the van's recorded GPS track.",
     },
     {
       id: 'sink',
@@ -99,7 +99,7 @@ export const milkrunPipeline: Spec = {
       x: 570,
       y: 320,
       detail:
-        'A federated SQL layer for analytics (delay zones, van rankings, SLA breach stats) that joins live metrics with static PostGIS zones, kept off the reactive connection pool that serves the hot path.',
+        'Federates PostgreSQL with the live in-memory fleet, so one SQL statement can join the vans at risk right now with their delivery history. Joins and aggregates are pushed down to PostgreSQL; queries run off the event loop that serves the stream.',
     },
     {
       id: 'dash',
@@ -138,7 +138,7 @@ export const milkrunPipeline: Spec = {
     },
     {
       title: 'Retries are dropped',
-      text: 'A retried ping carries the same sequence number. The Bloom filter has already seen that key, so the duplicate never reaches the ETA engine.',
+      text: 'A retried ping carries the same sequence number. The deduplicator has already seen that key, so the duplicate never reaches the ETA engine.',
       nodes: ['dedup', 'reorder'],
       edges: ['dedup>reorder'],
     },
@@ -149,14 +149,14 @@ export const milkrunPipeline: Spec = {
       edges: ['reorder>eta'],
     },
     {
-      title: 'Late events are kept for audit, not lost',
-      text: "An event that shows up after newer ones were already released can't be reordered anymore. It goes to a dead-letter queue that is persisted for audit.",
+      title: 'Late events are kept, not lost',
+      text: "An event that shows up after newer ones were already released can't be reordered anymore. It is logged for audit and still written into the van's recorded track.",
       nodes: ['reorder', 'dlq', 'pg'],
       edges: ['reorder>dlq', 'dlq>pg'],
     },
     {
       title: 'ETA and SLA risk are computed',
-      text: 'Haversine distance, slowed by geofence speed factors from PostGIS, gives an ETA per stop. If the engine misbehaves, the circuit breaker opens and a simple extrapolation takes over.',
+      text: 'The remaining road to the next stop, slowed by PostGIS delay zones, gives an ETA; comparing it with the delivery slot gives the SLA risk. If the estimator misbehaves, the circuit breaker opens and a straight-line estimate takes over.',
       nodes: ['eta', 'sink'],
       edges: ['eta>sink'],
     },
@@ -168,7 +168,7 @@ export const milkrunPipeline: Spec = {
     },
     {
       title: 'Analytics stay off the hot path',
-      text: 'Apache Calcite runs federated SQL over the PostGIS archive for delay-zone and SLA analytics, separate from the connection pool that serves the stream.',
+      text: 'Apache Calcite joins the live fleet with delivery history in PostgreSQL for delay-zone and SLA analytics, on its own thread, away from the event loop that serves the stream.',
       nodes: ['calcite', 'pg', 'dash'],
       edges: ['calcite>pg', 'calcite>dash'],
     },

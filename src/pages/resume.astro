@@ -11,9 +11,9 @@ const projects = [
     href: '/work/milkrun',
     bullets: [
       'Architected a reactive telemetry pipeline with Spring WebFlux and reactor-kafka, streaming GPS events from 50 simulated delivery vans through Kafka to a React/Leaflet dashboard over Server-Sent Events.',
-      'Mitigated duplicate payloads from simulated retry storms with an FNV-1a Bloom filter, and reconciled out-of-order events with a per-van priority-queue reorder buffer, routing expired entries to a dead-letter queue for audit.',
-      'Computed SLA-risk ETAs from Haversine distance and PostGIS geofence speed factors behind a Resilience4j circuit breaker, and federated live metrics with PostGIS zones via Apache Calcite for delay analytics.',
-      'Instrumented with Micrometer, Prometheus and Grafana; 38 automated tests run in GitHub Actions CI.',
+      'Removed duplicate and out-of-order GPS events with an exact sliding-window deduplicator (8x a Bloom filter’s throughput) and per-van reorder buffers, committing Kafka offsets only after idempotent writes.',
+      'Predicted arrivals by map-matching GPS onto planned routes with PostGIS delay zones (~5 s mean error), and federated the live fleet with PostgreSQL history via Apache Calcite.',
+      'Shipped via GitHub Actions CD with automatic rollback; Prometheus and Grafana; 159 tests incl. Testcontainers.',
     ],
   },
   {

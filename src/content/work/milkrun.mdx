@@ -9,7 +9,7 @@ stack: ['Java 21', 'Spring WebFlux', 'Project Reactor', 'Kafka', 'PostgreSQL / P
 metrics:
   - { value: '50 vans', label: 'streamed live' }
   - { value: '83M+', label: 'events processed' }
-  - { value: '38', label: 'automated tests in CI' }
+  - { value: '159', label: 'automated tests in CI' }
 links:
   - { label: 'Live dashboard', href: 'https://marwan-milkrun.duckdns.org/' }
   - { label: 'Source on GitHub', href: 'https://github.com/marwan-eid/MilkRun' }
@@ -26,7 +26,7 @@ import { milkrunPipeline } from '../../data/diagrams';
 
 ## The problem
 
-MilkRun simulates milkman-style grocery delivery: 50 electric vans working routes across Amsterdam, each reporting its position every 500 ms. The goal is a dispatcher's view that is **live** (updates within a second), **correct** (no vans teleporting backwards, no double-counted stops) and **honest about risk** (which deliveries are about to miss their slot).
+MilkRun simulates milkman-style grocery delivery: 50 electric vans working routes across Amsterdam, each reporting its position every 500 ms. The goal is a dispatcher's view that is **live** (every van updates twice a second, about three seconds behind reality), **correct** (no vans teleporting backwards, no double-counted stops) and **honest about risk** (which deliveries are about to miss their slot).
 
 The hard part isn't drawing dots on a map. Real vehicle telemetry is messy, and the simulator reproduces that on purpose:
 
@@ -51,7 +51,7 @@ The backend is Spring WebFlux on Project Reactor, consuming Kafka with reactor-k
 
 Updates only flow one way, from server to browser. SSE is plain HTTP, reconnects automatically, passes through proxies without special handling, and is a one-liner with `EventSource` on the client. The sink is sampled to at most two updates per second per van and runs in best-effort mode: a client that can't keep up is dropped, not buffered, so one sleeping tab can't back up the stream.
 
-### A Bloom filter for deduplication
+### Deduplication: a Bloom filter, then an exact window
 
 A retried event carries the same `(van, sequence number)` pair as the original. Remembering every key ever seen in a hash set grows without bound. A Bloom filter answers "have I seen this?" in constant time and **constant memory**. The price is a small, tunable chance of a false positive, and it never produces false negatives, so a real duplicate always gets caught.
 
@@ -71,17 +71,23 @@ Positions come from double hashing, `h(i) = h1 + i·h2`, with Java's `String.has
 
 Each van has a priority queue ordered by device timestamp. An event waits out a **3-second grace window** and is then released in order. That trades three seconds of latency for correctness downstream: the ETA engine never sees a van jump backwards.
 
-Anything that arrives after a newer event has been released is too late to reorder. Dropping it silently would hide data-quality problems, so it goes to a **dead-letter queue** and is persisted for audit. A van that reports `RETURNED` flushes its buffer immediately, since no more events are coming, and a size cap force-flushes if a buffer ever grows past 50 events.
+Anything that arrives after a newer event has been released is too late to reorder. Dropping it silently would hide data-quality problems, so it goes to a **dead-letter log** for audit, and since it is still a real position it is also written into the van's recorded GPS track. Late events are not hypothetical here: when a van's connection drops, the simulated device buffers its pings and uploads them in a burst after reconnecting, and a burst that comes too late lands on exactly this path. A van that reports `RETURNED` flushes its buffer immediately, since no more events are coming, and a size cap force-flushes if a buffer ever grows past 50 events.
 
 <ReorderBufferDemo client:visible />
 
 ### Failing soft on ETAs
 
-The ETA is Haversine distance to the next stop, adjusted by PostGIS geofence speed factors: construction at Vondelpark slows vans to 40% speed, the Central Station area to 50%, and so on. That calculation sits behind a **Resilience4j circuit breaker**. If it starts failing or slowing down, the breaker opens and a linear extrapolation from recent positions takes over, so the map degrades to "approximately right" instead of "stuck".
+Every van publishes its planned route (street geometry, stops, delivery slots) to a compacted Kafka topic. The backend places each GPS ping on the van's current leg and walks the remaining road to the next stop, slowing each segment by the PostGIS delay zone it runs through (construction at Vondelpark cuts speed to 40%, the Central Station area to 50%), at a speed learned from how fast that van has actually been progressing. The predicted arrival is compared with the stop's slot: **on time**, **tight** (under a minute to spare) or **projected late**. Measured on arrival, the prediction made when a van sets off for a stop was off by about five seconds on average in test runs.
+
+The estimator sits behind a **Resilience4j circuit breaker**. If it keeps failing, or a van is off its planned route, a straight-line distance times a detour factor takes over, so the map degrades to "approximately right" instead of "stuck".
+
+### Dispatch that respects everyone's slot
+
+Right-clicking the map creates an order. The backend tries it before every remaining stop of every van, costs each option as the extra driving it adds plus a penalty for every other delivery it would push past its slot, and sends the cheapest one to that van, which reroutes without backtracking. The map shows which van got it and when it is expected.
 
 ### Analytics off the hot path
 
-Questions like "which zones cause the most delay?" or "which vans breach their SLA most?" run through **Apache Calcite**, which federates SQL over the PostGIS archive. The analytics queries never compete with the reactive connection pool that serves the live stream.
+Questions like "which zones cause the most delay?" run through **Apache Calcite**, which federates two sources in one SQL statement: PostgreSQL (joins and aggregates are pushed down to it) and the fleet's live in-memory state. That makes queries like "which vans are at risk right now, and how often have they been late before?" a single join. Queries run on their own thread, never on the event loop that serves the live stream.
 
 ## What 11 days of uptime taught me
 
@@ -89,13 +95,14 @@ The live counters at the top of this page come from the pipeline's health endpoi
 
 The cause is in the sizing math above. Each filter is built for **100,000 insertions**, but at two pings a second a van passes that in under 14 hours, and the filters were never reset. As the bit arrays fill up, the false-positive rate climbs toward 100%, and brand-new events start looking like duplicates. You can reproduce it in the demo above: keep sending events and watch "real events dropped" climb.
 
-The fix is to make the filter **windowed**: keep two generations per van, check both, insert into the newer one, and rotate when the current one reaches its capacity. Retries arrive within seconds, so remembering the last ~100k events per van is more than enough, and memory stays bounded. Because sequence numbers only ever increase per van, an exact sliding-window bitmap (the anti-replay trick used by IPsec) would also work, with no false positives at all.
+The fix is to make the filter **windowed**: keep two generations per van, check both, insert into the newer one, and rotate when the current one reaches its capacity. Retries arrive within seconds, so remembering the last ~100k events per van is more than enough, and memory stays bounded. Because sequence numbers only ever increase per van, there is an exact alternative, and the pipeline now uses it by default: a sliding-window bitmap, the anti-replay trick from IPsec. It keeps the highest sequence number per van plus 4,096 bits for the numbers just below it. No false positives, 512 bytes per van instead of about 360 KB, and in a JMH benchmark 26.8 million checks per second against the Bloom filter's 3.4 million. The Bloom filter stays available behind the same interface, since it does not depend on ordering.
 
-The broader lesson: probabilistic structures come with a capacity, and "sized for n" quietly turns into a bug once you pass n. Anything with a capacity deserves a metric and an alert.
+The broader lesson: probabilistic structures come with a capacity, and "sized for n" quietly turns into a bug once you pass n. Anything with a capacity deserves a metric and an alert, so the health endpoint now reports rates over the last five minutes rather than since startup, and a scheduled check alerts when duplicate rejection climbs.
 
 ## Testing and operations
 
-- **38 automated tests** run in GitHub Actions on every push: 23 Vitest tests for the simulator and 15 JUnit tests for the backend (Bloom filter, reorder buffer, ETA engine).
-- **Micrometer counters at every pipeline stage**, scraped by Prometheus and graphed in Grafana, plus a Datadog-ready dashboard definition.
-- **GraalVM native image** as an optional build target, with reflection and serialization metadata checked in.
-- **Deployed with Docker Compose behind Caddy** (automatic TLS) on a single Oracle Cloud VM: Kafka, PostgreSQL/PostGIS, the backend, the simulator and the frontend.
+- **159 automated tests** run in GitHub Actions on every push: 100 JUnit tests for the backend, including end-to-end tests against real Kafka and PostGIS containers (Testcontainers), 46 Vitest tests for the simulator and 13 for the dashboard.
+- **Each event is handled once, even across crashes**: Kafka offsets are committed only after an event has been fully handled, and every database write is idempotent, so replaying records after a restart changes nothing.
+- **Micrometer metrics at every pipeline stage**, scraped by Prometheus with alert rules and a provisioned Grafana dashboard, including end-to-end latency and ETA accuracy.
+- **Continuous delivery**: after CI passes, GitHub Actions builds the images and pushes them to GHCR; a rollout script moves the VM to them, waits for the backend to report healthy, and rolls back automatically if it doesn't. On the first real rollout, a database migration outlasted the health window and the rollback kicked in exactly as designed.
+- **Deployed with Docker Compose behind Caddy** (automatic TLS) on a single Oracle Cloud VM with 1 GB of RAM: Kafka, PostgreSQL/PostGIS, the backend, the simulator and the frontend.
