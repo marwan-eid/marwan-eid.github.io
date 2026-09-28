@@ -518,3 +518,120 @@ export const chatSystem: Spec = {
     },
   ],
 };
+
+export const whiteboardSync: Spec = {
+  title: 'Whiteboard · edit path',
+  width: 930,
+  height: 370,
+  nodes: [
+    {
+      id: 'client',
+      label: 'Client A',
+      sub: 'optimistic · IndexedDB',
+      x: 20,
+      y: 150,
+      tone: 'external',
+      detail:
+        'Applies every edit locally first, so drawing never waits on the network. Unacknowledged edits sit in a pending queue and are resent after a reconnect.',
+    },
+    {
+      id: 'gateway',
+      label: 'WebSocket gateway',
+      sub: 'Go · bounded queues',
+      x: 205,
+      y: 150,
+      detail:
+        'One reader and one writer goroutine per connection. Each connection has a bounded send queue: a client that falls behind is closed and resyncs from a fresh snapshot, so one slow client never stalls the board.',
+    },
+    {
+      id: 'actor',
+      label: 'Board actor',
+      sub: '1 goroutine per board',
+      x: 390,
+      y: 150,
+      tone: 'accent',
+      detail:
+        'The single writer for its board. Every ~20 ms tick it drains its inbox, clamps clocks that run ahead, validates, applies last-writer-wins merges and assigns each batch a sequence number.',
+    },
+    {
+      id: 'pg',
+      label: 'Postgres',
+      sub: 'one COPY per tick',
+      x: 575,
+      y: 40,
+      tone: 'store',
+      detail:
+        'The op log is the source of truth. A whole tick of edits is written in one COPY, and only after it commits are acks and frames sent. The (board_id, seq) primary key doubles as a fence against two writers.',
+    },
+    {
+      id: 'grid',
+      label: 'Spatial grid',
+      sub: '512 × 512 cells',
+      x: 390,
+      y: 285,
+      tone: 'accent',
+      detail:
+        'Maps grid cells to objects. For every edit the server compares the object’s box before and after against each client’s viewport and decides: send a delta, send the full object (enters view), or tell the client to drop it (leaves view).',
+    },
+    {
+      id: 'others',
+      label: 'Other clients',
+      sub: 'only their viewport',
+      x: 760,
+      y: 150,
+      tone: 'external',
+      detail:
+        'Each receives one frame per tick with only what concerns its viewport. Frames are assembled from pieces encoded once per tick, and built in parallel by worker goroutines when a board has 32+ clients.',
+    },
+    {
+      id: 'history',
+      label: 'History worker',
+      sub: 'snapshots + zstd segments',
+      x: 575,
+      y: 285,
+      tone: 'muted',
+      detail:
+        'Rebuilds the board at any past version from the nearest snapshot or cached keyframe plus a replay of the log. It runs on the requesting connection’s goroutine, never the board actor, so scrubbing history can’t slow live editing.',
+    },
+  ],
+  edges: [
+    { from: 'client', to: 'gateway' },
+    { from: 'gateway', to: 'actor' },
+    { from: 'actor', to: 'pg', label: 'commit' },
+    { from: 'actor', to: 'grid', label: 'interest' },
+    { from: 'actor', to: 'others', label: 'Frame' },
+    { from: 'history', to: 'pg', fromSide: 't', toSide: 'b' },
+  ],
+  steps: [
+    {
+      title: 'The edit happens locally first',
+      text: 'Client A applies the change immediately, queues it until the server acknowledges it, and sends it as an OpBatch in a binary Protobuf frame.',
+      nodes: ['client', 'gateway'],
+      edges: ['client>gateway'],
+    },
+    {
+      title: 'One writer per board',
+      text: 'The board actor drains its inbox every ~20 ms tick, clamps timestamps that run ahead of server time, merges each property last-writer-wins, and assigns a sequence number.',
+      nodes: ['gateway', 'actor'],
+      edges: ['gateway>actor'],
+    },
+    {
+      title: 'Durable before visible',
+      text: 'The whole tick is written to Postgres in one COPY. Only after that commit does anyone see the edit, so nothing acknowledged can be lost, even to a SIGKILL.',
+      nodes: ['actor', 'pg'],
+      edges: ['actor>pg'],
+    },
+    {
+      title: 'Each client gets only its viewport',
+      text: 'The spatial grid decides, per client, whether the edit is a delta, an object entering view, or one leaving it. A client on a 100,000-object board holds about a hundred of them.',
+      nodes: ['actor', 'grid', 'others'],
+      edges: ['actor>grid', 'actor>others'],
+    },
+    {
+      title: 'Full history, off the hot path',
+      text: 'Old log rows are compacted into zstd segments. Any past version is rebuilt from a snapshot plus replay on a separate goroutine, and a restore is appended as new ops, so it can be undone.',
+      nodes: ['history', 'pg'],
+      edges: ['history>pg'],
+    },
+  ],
+};

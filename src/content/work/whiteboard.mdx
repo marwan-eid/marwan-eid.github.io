@@ -1,0 +1,102 @@
+---
+title: 'Whiteboard: real-time collaboration, built from the sync layer up'
+kicker: 'Personal project · in progress'
+summary: 'An open-source, self-hostable collaborative whiteboard with its own sync engine in Go: server-sequenced last-writer-wins merges, viewport-only loading on 100,000-object boards, crash-safe persistence and full version history.'
+order: 2
+period: 'Sep 2026 – present'
+role: 'Solo: design, backend, frontend, testing'
+stack: ['Go', 'TypeScript', 'WebSockets', 'Protobuf', 'PostgreSQL', 'PixiJS', 'Preact', 'zstd', 'Prometheus', 'Docker', 'Caddy', 'Playwright']
+metrics:
+  - { value: '31 B/edit', label: 'full history, at 1M edits' }
+  - { value: '139 of 100k', label: 'objects a client holds' }
+  - { value: '5 of 11', label: 'milestones shipped' }
+links:
+  - { label: 'Source on GitHub', href: 'https://github.com/marwan-eid/whiteboard' }
+featured: true
+---
+
+import Diagram from '../../components/Diagram.tsx';
+import { whiteboardSync } from '../../data/diagrams';
+
+> **Work in progress.** Five of eleven planned milestones are done: sync, durability, a usable editor, single-board scale, and history. The numbers on this page are local pre-checks on a laptop and are labelled that way in the repo. The real load tests are planned for milestone 9.
+
+## The problem
+
+Collaborative whiteboards look simple until you ask them to scale. Most are built on a document CRDT such as Yjs, where **every client loads the whole document**. That's fine for a small board and painful for a big one. It also means the server sees opaque updates, so it can't validate edits, enforce limits, or send each person only what's on their screen.
+
+I wanted a whiteboard that:
+
+- **converges deterministically** when many people edit at once, including people who were offline,
+- sends each client **only its viewport**, even on a board with 100,000 objects,
+- **never loses an acknowledged edit**, even if the server is killed mid-drag,
+- keeps **every version**, with a replay slider and point-in-time restore,
+- runs anywhere with **one `docker compose up`**.
+
+## Architecture
+
+Every edit takes the same path: applied locally, sequenced by a single writer per board, committed, then fanned out to exactly the clients who can see it. Click a component, or play the walkthrough.
+
+<Diagram client:visible {...whiteboardSync} />
+
+## Key decisions
+
+Each of these is written up as an architecture decision record in the repo, with the options considered and why they lost.
+
+### A custom sync model instead of Yjs or Automerge
+
+Both are mature, but both assume every client holds the whole document, and the server can't read it. Instead, each object is a **map of properties, and each property is a last-writer-wins register** stamped with a hybrid logical clock. The merge is commutative, associative and idempotent, so replicas converge whatever order ops arrive in.
+
+The server assigns each accepted batch a per-board sequence number, so **the op log is the event store**: history and replay come for free. The trade-off is explicit: concurrent typing in the same sticky note resolves to one winner. The approach follows Figma's published multiplayer design.
+
+Two details make it safe in practice:
+
+- **Clock abuse.** A stamp more than 2 s ahead of server time is clamped, so a client with a wrong clock can't win every conflict.
+- **Deletes are just a property.** Deleting sets `deleted = true`, so a concurrent edit can't resurrect an object, and undo or restore brings it back with a newer stamp. One merge rule covers everything.
+
+### One writer per board, durable before visible
+
+Each board is owned by **one actor goroutine**. Every ~20 ms tick it applies the batches in its inbox, then writes the **whole tick to Postgres in one `COPY`**. Only after that commit does it send acks and broadcast to others.
+
+So no client ever sees an edit that could still be lost. If a commit fails, the board kicks everyone and unloads (crash-only). Clients still hold their unacknowledged edits and resend them, and the board acknowledges duplicates without reapplying them.
+
+### The server decides what each client holds
+
+A uniform **spatial grid** of 512 × 512-unit cells indexes every object. For each edit, the server compares the object's box before and after against each client's viewport. The client then gets a delta, the full object (it entered the view), or an instruction to drop it (it left).
+
+An early version let clients evict objects on their own. **Randomized tests caught the race**: after a concurrent edit, the server could believe a client still held an object it had dropped. Moving that decision to the server fixed it, and the same tests later caught two subtler cases around pending edits and viewport changes.
+
+On a 100,000-object board, a client at 100% zoom holds **72 objects at start and 139 after panning**. Zoomed out below 20%, the server sends only boxes and colors, and the client draws each object as one GPU particle.
+
+### Profiling before optimizing
+
+With 200 simulated editors on one board, a CPU profile showed **about 30% of CPU was presence** (live cursors), all on the board actor's single goroutine. Three changes followed:
+
+- presence updates every 3rd tick instead of every tick,
+- each op and cursor update is **encoded once per tick**, and each client's frame is assembled from those pre-encoded bytes (a property test checks the result decodes exactly),
+- frames for boards with 32+ clients are built **in parallel** by worker goroutines.
+
+In the local pre-check, **p99 sync latency went from 254 ms to 124 ms**, and server-side time per batch from 75 ms to 27 ms.
+
+### Postgres only, with compaction
+
+Postgres holds the op log, snapshots and history: one dependency, transactions, and easy backups. Its weak spot is per-row overhead, so after each snapshot, old ops are packed into **zstd-compressed segments** of 10,000 entries.
+
+Measured at one million edits, full history takes **31.3 bytes per edit, against 172 bytes as one row per edit: 5.5× smaller**. The payload was only ever about 50 bytes; the rest was Postgres row overhead that compaction removes.
+
+### Go, with one Protobuf schema
+
+Go's goroutines map naturally onto one actor per board and a reader and writer per connection, and it ships as a single static binary for self-hosting. The wire protocol is **Protobuf over binary WebSocket frames**, generated for both Go and TypeScript from one schema, and the Go and TypeScript merge functions are checked against **shared test vectors** so they can't drift apart.
+
+## Testing
+
+- **Randomized convergence tests** drive real sockets with random edits, dropped connections, offline periods and changing viewports. Every client must end up with exactly the server's visible objects.
+- **Crash tests:** boards are crashed repeatedly during randomized editing, and an end-to-end test **SIGKILLs the real server mid-edit**. Both check that every acknowledged batch is in the log and every replica converges.
+- **Property-based tests** on the browser's sync session against a model server.
+- **Playwright** browser tests cover two browsers syncing, every editor tool, and a server restart.
+
+## What's next
+
+- **Access and offline:** guest tokens, private boards, revocable share links, and a bounded offline queue.
+- **Timers, voting and a public live-metrics panel.**
+- **Scale-out:** Postgres-backed node membership, rendezvous hashing to place boards, leases with fencing, and failover with zero lost acknowledged edits.
+- **Real load tests** on a documented rig, then a public demo on a free-tier Oracle Cloud VM.
