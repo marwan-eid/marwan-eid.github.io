@@ -5,6 +5,16 @@ import { profile, experience, education, skills } from '../data/profile';
 
 const projects = [
   {
+    name: 'Whiteboard: Real-Time Collaboration',
+    stack: 'Go, TypeScript, Protobuf, PostgreSQL',
+    when: 'Sep 2026 – now',
+    href: '/work/whiteboard',
+    bullets: [
+      'Building an open-source whiteboard on a custom sync engine: server-sequenced per-property LWW merges with hybrid logical clocks, one actor goroutine per board, and edits group-committed to Postgres before ack.',
+      'Sent each client only its viewport via a spatial grid (~139 of 100k objects), halved p99 sync latency at 200 editors (254 → 124 ms), and cut full-history storage 5.5× to 31 B/edit.',
+    ],
+  },
+  {
     name: 'MilkRun: Real-Time Fleet Tracking',
     stack: 'Java, Kafka, PostgreSQL/PostGIS, React',
     when: 'Aug 2026',
@@ -130,7 +140,7 @@ const projects = [
         <dl class="mt-4 space-y-1.5 text-[0.92rem]">
           {
             skills.map((g) => (
-              <div class="grid gap-x-4 sm:grid-cols-[11rem_1fr]">
+              <div class="skills-row grid gap-x-4 sm:grid-cols-[11rem_1fr]">
                 <dt class="font-medium">{g.group}</dt>
                 <dd class="text-muted">{g.items.join(', ')}</dd>
               </div>
@@ -177,6 +187,9 @@ const projects = [
     :global(main) {
       padding: 0;
     }
+    :global(main > .container-page) {
+      padding: 0 !important;
+    }
     .resume {
       border: 0 !important;
       box-shadow: none !important;
@@ -205,8 +218,8 @@ const projects = [
     .resume :global(dl > div + div) {
       margin-top: 0.1rem !important;
     }
-    .resume :global(dl .sm:grid-cols-[11rem_1fr]) {
-      grid-template-columns: 9.5rem 1fr;
+    .skills-row {
+      grid-template-columns: 8.5rem 1fr !important;
     }
     .resume h1 {
       font-size: 17pt;
@@ -214,7 +227,7 @@ const projects = [
     .resume-list {
       margin-top: 0.25rem;
       font-size: 8.7pt;
-      line-height: 1.38;
+      line-height: 1.33;
     }
     .resume-list li + li {
       margin-top: 0.1rem;
